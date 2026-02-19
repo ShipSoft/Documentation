@@ -1,0 +1,41 @@
+site_name: FairShip Documentation
+site_description: Official documentation for the FairShip simulation framework
+site_author: SHiP Collaboration
+repo_url: https://github.com/ShipSoft/FairShip
+repo_name: ShipSoft/FairShip
+
+theme:
+  name: material
+  logo: https://ship.web.cern.ch/sites/default/files/SHIP_logo.png
+  favicon: https://ship.web.cern.ch/sites/default/files/favicon.ico
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.instant
+    - content.code.copy
+    - search.highlight
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Running FairShip: running.md
+  - Configuration: configuration.md
+  - Development: development.md
+  - FAQ: faq.md
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - tables
+  - fenced_code
+  - codehilite
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ShipSoft/FairShip
