@@ -19,6 +19,7 @@ theme:
 nav:
   - Home: index.md
   - Installation: installation.md
+  - Samples: samples.md
   - Running FairShip: running.md
   - Configuration: configuration.md
   - Development: development.md
