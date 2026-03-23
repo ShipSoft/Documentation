@@ -1,19 +1,24 @@
 [project]
-site_name = "FairShip Documentation"
-site_description = "Official documentation for the FairShip simulation framework"
+site_name = "SHiP Software"
+site_description = "Documentation for the SHiP experiment software"
 site_author = "SHiP Collaboration"
-
-repo_url = "https://github.com/ShipSoft/FairShip"
-repo_name = "ShipSoft/FairShip"
+site_url = "https://shipsoft.github.io/Documentation/"
 
 nav = [
   { "Home" = "index.md" },
-  { "Installation" = "installation.md" },
-  { "Samples" = "samples.md" },
-  { "Running FairShip" = "running.md" },
-  { "Configuration" = "configuration.md" },
-  { "Development" = "development.md" },
-  { "FAQ" = "faq.md" },
+  { "FairShip" = [
+    { "Overview" = "fairship/index.md" },
+    { "Installation" = "fairship/installation.md" },
+    { "Samples" = "fairship/samples.md" },
+    { "Running" = "fairship/running.md" },
+    { "Configuration" = "fairship/configuration.md" },
+    { "Development" = "fairship/development.md" },
+    { "FAQ" = "fairship/faq.md" },
+  ] },
+  { "Geometry" = "geometry/index.md" },
+  { "shipdist" = "shipdist/index.md" },
+  { "cvmfs_release" = "cvmfs-release/index.md" },
+  { "HTCondor" = "htcondor/index.md" },
 ]
 
 [project.theme]
@@ -26,6 +31,8 @@ features = [
     "content.code.copy",
     "navigation.expand",
     "navigation.instant",
+    "navigation.instant.prefetch",
+    "navigation.indexes",
     "navigation.sections",
     "navigation.tabs",
     "search.highlight",
@@ -43,7 +50,7 @@ toggle.name = "Switch to light mode"
 
 [[project.extra.social]]
 icon = "fontawesome/brands/github"
-link = "https://github.com/ShipSoft/FairShip"
+link = "https://github.com/ShipSoft"
 
 [project.markdown_extensions.admonition]
 

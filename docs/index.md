@@ -1,16 +1,13 @@
-# FairShip Documentation
+# SHiP Software
 
-FairShip is the simulation and reconstruction framework for the SHiP experiment.
+[![SHiP logo](https://ship.web.cern.ch/sites/default/files/SHIP_logo.png)](https://ship.web.cern.ch/)
 
-It is based on:
+Welcome to the documentation for the [SHiP experiment](https://ship.web.cern.ch/) software.
 
-- FairRoot
-- ROOT
-- Geant4
-- Pythia8
+## Projects
 
-## Quick start
-
-```bash
-aliBuild build FairShip
-alienv enter FairShip/latest
+- **[FairShip](fairship/index.md)** — Simulation and reconstruction framework
+- **[Geometry](geometry/index.md)** — Detector geometry description
+- **[shipdist](shipdist/index.md)** — Build recipes for the SHiP software stack
+- **[cvmfs_release](cvmfs-release/index.md)** — CVMFS release management
+- **[HTCondor](htcondor/index.md)** — Job submission scripts for the HTCondor batch system
