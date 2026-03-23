@@ -1,8 +1,8 @@
-# Documentation for the FairShip package:
+# Documentation for the FairShip package
 
-- The file mkdocs.yml controls the site appearance, add filenames there to have them appear as tabs, inside the **nav:** block
-- The documentation files are located in docs/ folder, with the markdown syntax: create your new file there with the filename given above.
+- The file `zensical.toml` controls the site appearance. Add filenames there to have them appear as tabs, inside the `nav` array.
+- The documentation files are located in the `docs/` folder, using Markdown syntax: create your new file there with the filename given above.
     - https://www.markdownguide.org/basic-syntax/
-- Edit and commit changes, the github page will update. This is controlled by the file **.github/workflows/deploy-docs.yml**
+- Edit and commit changes, the GitHub page will update. This is controlled by the file `.github/workflows/deploy-docs.yml`.
 
-- Fill free to improve the style/content/ordering etc... ! 
+- Feel free to improve the style/content/ordering etc.!
