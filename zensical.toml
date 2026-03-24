@@ -23,8 +23,8 @@ nav = [
 
 [project.theme]
 variant = "classic"
-logo = "https://ship.web.cern.ch/sites/default/files/SHIP_logo.png"
-favicon = "https://ship.web.cern.ch/sites/default/files/favicon.ico"
+logo = "https://ship.web.cern.ch/wp-content/uploads/2025/07/SHiP-Symbol_White_logo_webpage-1.png"
+favicon = "https://ship.web.cern.ch/wp-content/uploads/2025/08/115x115.png"
 language = "en"
 
 features = [
