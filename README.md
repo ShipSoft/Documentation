@@ -1,4 +1,4 @@
-# Documentation for the FairShip package
+# High-level documentation for SHiP software
 
 - The file `zensical.toml` controls the site appearance. Add filenames there to have them appear as tabs, inside the `nav` array.
 - The documentation files are located in the `docs/` folder, using Markdown syntax: create your new file there with the filename given above.

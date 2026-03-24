@@ -1,7 +1,5 @@
 # SHiP Software
 
-[![SHiP logo](https://ship.web.cern.ch/wp-content/uploads/2025/08/SHiP-Full_Black.png)](https://ship.web.cern.ch/)
-
 Welcome to the documentation for the [SHiP experiment](https://ship.web.cern.ch/) software.
 
 ## Projects
