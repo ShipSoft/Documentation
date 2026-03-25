@@ -1,0 +1,12 @@
+title: "SHiP Software Documentation"
+author: "SHiP Collaboration"
+papersize: a4
+fontsize: 11pt
+lang: en-GB
+colorlinks: true
+linkcolor: blue
+urlcolor: blue
+toccolor: black
+mainfont: "Noto Serif"
+sansfont: "Noto Sans"
+monofont: "Noto Sans Mono"

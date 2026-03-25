@@ -1,0 +1,65 @@
+name: Build PDF
+
+on:
+  push:
+    branches: [main, master]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-core fonts-noto-extra
+
+      - name: Install pandoc
+        run: |
+          PANDOC_VERSION=3.6.4
+          wget -q "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
+          sudo dpkg -i "pandoc-${PANDOC_VERSION}-1-amd64.deb"
+
+      - name: Install typst
+        run: |
+          TYPST_VERSION=0.13.1
+          wget -q "https://github.com/typst/typst/releases/download/v${TYPST_VERSION}/typst-x86_64-unknown-linux-musl.tar.xz"
+          tar xf typst-x86_64-unknown-linux-musl.tar.xz
+          sudo mv typst-x86_64-unknown-linux-musl/typst /usr/local/bin/
+
+      - name: Build PDF
+        run: |
+          pandoc \
+            --pdf-engine=typst \
+            --metadata-file=pdf/metadata.yaml \
+            --toc --toc-depth=2 \
+            --number-sections \
+            -o ship-software-documentation.pdf \
+            docs/index.md \
+            docs/fairship/index.md \
+            docs/fairship/installation.md \
+            docs/fairship/samples.md \
+            docs/fairship/running.md \
+            docs/fairship/configuration.md \
+            docs/fairship/development.md \
+            docs/fairship/faq.md \
+            docs/geometry/index.md \
+            docs/shipdist/index.md \
+            docs/cvmfs-release/index.md \
+            docs/htcondor/index.md
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ship-software-documentation
+          path: ship-software-documentation.pdf
+
+      - name: Attach PDF to release
+        if: github.event_name == 'release'
+        run: gh release upload "${{ github.event.release.tag_name }}" ship-software-documentation.pdf
+        env:
+          GH_TOKEN: ${{ github.token }}
