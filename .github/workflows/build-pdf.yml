@@ -48,6 +48,12 @@ jobs:
             docs/fairship/development.md \
             docs/fairship/faq.md \
             docs/geometry/index.md \
+            docs/simulation/index.md \
+            docs/simulation/installation.md \
+            docs/simulation/samples.md \
+            docs/simulation/running.md \
+            docs/simulation/development.md \
+            docs/simulation/faq.md \
             docs/shipdist/index.md \
             docs/cvmfs-release/index.md \
             docs/htcondor/index.md
