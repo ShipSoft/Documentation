@@ -5,6 +5,7 @@ Welcome to the documentation for the [SHiP experiment](https://ship.web.cern.ch/
 ## Projects
 
 - **[FairShip](fairship/index.md)** — Simulation and reconstruction framework
+- **[Simulation](simulation/index.md)** — Simulation framework
 - **[Geometry](geometry/index.md)** — Detector geometry description
 - **[shipdist](shipdist/index.md)** — Build recipes for the SHiP software stack
 - **[cvmfs_release](cvmfs-release/index.md)** — CVMFS release management
