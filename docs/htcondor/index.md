@@ -8,7 +8,9 @@ Repository: [ShipSoft/htcondor_submission_scripts](https://github.com/ShipSoft/h
 ## Quick start -- `run_fixedTarget.py` example with ganga
 You will need 2 files in order to run your script: `bashScript.sh` and `gangaScript.py`.
 
-Your `bashScript.sh` lays out what you want to run. For example, for `run_fixedTarget.py`, you would use something like the following (note that you could also use your own version of FairShip):
+Your `bashScript.sh` lays out what you want to run. The snippet below
+sources the CVMFS aliBuild release **26.04** as an example — substitute
+the release you want, or point at your own FairShip build instead.
 ```
 FS_INSTALL=/cvmfs/ship.cern.ch/26.04/
 export WORK_DIR=${FS_INSTALL}/sw/

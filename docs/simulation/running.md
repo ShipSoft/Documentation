@@ -1,18 +1,32 @@
 # Running
 
-For a series of use cases (eg. updating `.jsonnet` files), it is not needed to build Aegir. Instead, if you have your local version of Aegir, you can simply execute the following commands
+If you have an aegir clone built with pixi, run any workflow with:
 
+```bash
+pixi run phlex -c workflows/fixed_target_mt.jsonnet
 ```
-export WORK_DIR=/cvmfs/ship-nightlies.cern.ch/next/sw/
-source $WORK_DIR/slc9_x86-64/aegir/latest/etc/profile.d/init.sh
+
+Or drop into a pixi shell first for an interactive session:
+
+```bash
+pixi shell
 phlex -c workflows/fixed_target_mt.jsonnet
 ```
 
-If you need to change the source code, remember to build Aegir.
+`activate.sh` sets `PHLEX_PLUGIN_PATH`, `LD_LIBRARY_PATH`,
+`SHIPGEOMETRY_ROOT`, and `AEGIR_ROOT` automatically in both modes — no
+manual prefix needed.
 
-Information regarding the simulation to generate is located in the `.jsonnet` files. A few examples are in the `workflow` folder.
+If you do not need to modify the source, you can also consume the
+pre-built `aegir` package from the
+[prefix.dev/ship](https://prefix.dev/channels/ship) channel — see
+[Installation](installation.md) for that flow.
 
-You can choose to use `geometry_geomodel_provider` or `geometry_gdml_provider` for the geometry: 
+Information regarding the simulation to generate is located in the
+`.jsonnet` files. A few examples are in the `workflows/` folder.
+
+You can choose to use `geometry_geomodel_provider` or
+`geometry_gdml_provider` for the geometry:
 
 ```
 geometry: {
