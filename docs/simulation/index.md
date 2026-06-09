@@ -9,15 +9,18 @@ It is based on:
 - [Geant4](https://geant4.web.cern.ch/)
 - [Pythia8](https://pythia.org/)
 
-Repository: [ShipSoft/Aegir](https://github.com/ShipSoft/aegir)
+Repository: [ShipSoft/aegir](https://github.com/ShipSoft/aegir)
 
 ## Quick start
 
+```bash
+git clone https://github.com/ShipSoft/aegir.git
+cd aegir
+pixi run build
+pixi run phlex -c workflows/pythia8_mt.jsonnet
 ```
-export WORK_DIR=/cvmfs/ship-nightlies.cern.ch/next/sw/
-source $WORK_DIR/slc9_x86-64/aegir/latest/etc/profile.d/init.sh
-phlex -c $WORK_DIR/slc9_x86-64/aegir/latest/share/aegir/workflows/pythia8_mt.jsonnet
-```
+
+See [Installation](installation.md) for details.
 
 ## Three steps to target simulation
 1. Collide proton beam at 400 GeV on fixed protons and neutrons using Pythia8

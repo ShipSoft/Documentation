@@ -9,7 +9,16 @@ Linux is supported:
 
 Other distributions may be available upon sufficient interest.
 
-## aliBuild not using system/CVMFS packages
+## LHCb environment interference
+
+The `lbenv` tool can break the SHiP software stack. Configure `lbenv` to prevent automatic loading. With the right configuration, both LHCb and SHiP software can coexist in the same account.
+
+## Legacy aliBuild issues (CVMFS releases ≤26.04)
+
+These FAQs only apply to the legacy aliBuild path — see
+[Installation → Legacy releases](installation.md#legacy-releases-cvmfs--alibuild-2604).
+
+### aliBuild not using system/CVMFS packages
 
 Use the `--always-prefer-system` flag on platforms like RHEL9 where aliBuild does not automatically use system packages:
 
@@ -17,7 +26,7 @@ Use the `--always-prefer-system` flag on platforms like RHEL9 where aliBuild doe
 aliBuild build --always-prefer-system FairShip
 ```
 
-## Git "unsafe directory" warning
+### Git "unsafe directory" warning
 
 Recent versions of Git may refuse to operate in directories owned by other users. If you see this warning, add the directory to the safe list:
 
@@ -26,7 +35,3 @@ git config --global --add safe.directory /cvmfs/ship.cern.ch/24.01/shipdist
 ```
 
 This was resolved in aliBuild 1.17.3+.
-
-## LHCb environment interference
-
-The `lbenv` tool can break the SHiP software stack. Configure `lbenv` to prevent automatic loading. With the right configuration, both LHCb and SHiP software can coexist in the same account.

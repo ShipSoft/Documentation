@@ -14,6 +14,11 @@ Repository: [ShipSoft/FairShip](https://github.com/ShipSoft/FairShip)
 ## Quick start
 
 ```bash
-aliBuild build FairShip
-alienv enter FairShip/latest
+git clone https://github.com/ShipSoft/FairShip.git
+cd FairShip
+pixi run build
+pixi run python macro/run_simScript.py --tag my-simulation
 ```
+
+See [Installation](installation.md) for the full details, including the
+legacy CVMFS + aliBuild path for releases ≤26.04.
