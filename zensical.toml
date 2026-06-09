@@ -24,6 +24,12 @@ nav = [
     { "FAQ" = "simulation/faq.md" },
   ] },
   { "Geometry" = "geometry/index.md" },
+  { "Packaging" = [
+    { "Overview" = "packaging/index.md" },
+    { "Add a recipe" = "packaging/add-a-recipe.md" },
+    { "Bump a version" = "packaging/bump-a-version.md" },
+    { "CI and secrets" = "packaging/ci-and-secrets.md" },
+  ] },
   { "shipdist" = "shipdist/index.md" },
   { "cvmfs_release" = "cvmfs-release/index.md" },
   { "HTCondor" = "htcondor/index.md" },
