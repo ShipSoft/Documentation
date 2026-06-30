@@ -12,6 +12,6 @@ New development uses pixi and the conda-forge ecosystem instead:
   the [prefix.dev/ship](https://prefix.dev/channels/ship) channel.
 
 For users on existing CVMFS releases, see
-[FairShip → Legacy releases](../fairship/installation.md#legacy-releases-cvmfs--alibuild-2604).
+[FairShip → Legacy releases](../fairship/installation.md#legacy-releases-cvmfs-alibuild-2604).
 
 Repository: [ShipSoft/shipdist](https://github.com/ShipSoft/shipdist)
