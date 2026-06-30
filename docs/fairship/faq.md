@@ -16,7 +16,7 @@ The `lbenv` tool can break the SHiP software stack. Configure `lbenv` to prevent
 ## Legacy aliBuild issues (CVMFS releases ≤26.04)
 
 These FAQs only apply to the legacy aliBuild path — see
-[Installation → Legacy releases](installation.md#legacy-releases-cvmfs--alibuild-2604).
+[Installation → Legacy releases](installation.md#legacy-releases-cvmfs-alibuild-2604).
 
 ### aliBuild not using system/CVMFS packages
 
