@@ -11,6 +11,8 @@ It is based on:
 
 Repository: [ShipSoft/FairShip](https://github.com/ShipSoft/FairShip)
 
+API reference: [Doxygen](https://shipsoft.github.io/FairShip/)
+
 ## Quick start
 
 ```bash
