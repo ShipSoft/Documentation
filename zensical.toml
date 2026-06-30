@@ -24,6 +24,9 @@ nav = [
     { "FAQ" = "simulation/faq.md" },
   ] },
   { "Geometry" = "geometry/index.md" },
+  { "Geometry Service" = "geometry_service/index.md" },
+  { "Field Service" = "field_service/index.md" },
+  { "Data Model" = "data-model/index.md" },
   { "Packaging" = [
     { "Overview" = "packaging/index.md" },
     { "Add a recipe" = "packaging/add-a-recipe.md" },

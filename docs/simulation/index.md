@@ -11,6 +11,8 @@ It is based on:
 
 Repository: [ShipSoft/aegir](https://github.com/ShipSoft/aegir)
 
+API reference: [Doxygen](https://shipsoft.github.io/aegir/)
+
 ## Quick start
 
 ```bash
