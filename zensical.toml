@@ -27,6 +27,13 @@ nav = [
   { "Geometry Service" = "geometry_service/index.md" },
   { "Field Service" = "field_service/index.md" },
   { "Data Model" = "data-model/index.md" },
+  { "Developer Guide" = [
+    { "Overview" = "dev-guide/index.md" },
+    { "Multi-package development" = "dev-guide/multi-package.md" },
+    { "Testing dependency PRs" = "dev-guide/testing-dependency-prs.md" },
+    { "Troubleshooting" = "dev-guide/troubleshooting.md" },
+    { "pixi-build gap log" = "dev-guide/pixi-build-gaps.md" },
+  ] },
   { "Packaging" = [
     { "Overview" = "packaging/index.md" },
     { "Add a recipe" = "packaging/add-a-recipe.md" },

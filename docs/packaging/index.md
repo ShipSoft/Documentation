@@ -38,6 +38,11 @@ downstream repo's pixi.toml  →  developer / CI environment
 - [Bump a package version](bump-a-version.md)
 - [CI workflows and secrets](ci-and-secrets.md)
 
+For building *unreleased* package versions during development (source
+dependencies, local channels), see the
+[Developer Guide](../dev-guide/index.md) — releases themselves always
+flow through the recipes here.
+
 ## Channel snapshot
 
 A weekly job in `ship-conda-recipes` writes the current channel
