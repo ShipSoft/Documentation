@@ -26,6 +26,21 @@ When Renovate opens a PR, check that:
   every pattern; if the PR fails to build with a hash mismatch,
   copy the expected SHA from the rattler-build error and push it.
 
+## Dev twins and `[package].version`
+
+Some artifacts outside `ship-conda-recipes` mirror release recipes for
+the [developer workflow](../dev-guide/index.md) and must be bumped in
+the same breath:
+
+- the `[package].version` in the source repo's `pixi.toml`
+  (data-model, Geometry, geometry_service) — source-built dev packages
+  must carry the released version or `run_exports` pins stop
+  resolving;
+- `field_service/recipe/recipe.yaml` — dev twin of
+  `recipes/field-service/recipe.yaml`;
+- `ship-conda-recipes/recipes-dev/phlex/` — dev twin of the
+  conda-forge phlex feedstock recipe.
+
 ## Branch-pinned recipes (manual)
 
 A few recipes pin a branch or commit instead of a release tag.
