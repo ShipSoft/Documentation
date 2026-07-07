@@ -80,3 +80,13 @@ the [Geometry Service](../geometry_service/index.md) and
 This simulation contains only target complex and hadron absorber. The magnetic field is also turned off.
 
 Once the target simulation is produced, particles (such as muons) can be further propagated through the detector. This is much less time consuming, which is why there is a separation between "target simulation" and the rest of the simulation.
+
+## GENIE neutrino generation
+
+Neutrino interactions are generated with [aegir-genie](https://github.com/ShipSoft/aegir-genie), a phlex source plugin that embeds the [GENIE](https://www.genie-mc.org/) event generator. Rather than the multi-step FairShip command-line pipeline (`gmkspl` → `gevgen` → `gntpc` → vertex re-placement), the plugin drives a `genie::GMCJDriver` directly: it convolves the SHiP neutrino flux with cross-section splines and the detector geometry, placing interaction vertices consistently with the material the simulation tracks through, with built-in protons-on-target accounting.
+
+Because GENIE is GPL-licensed, everything that links it lives in the separate `aegir-genie` repository (the SHiP-authored source is LGPL-3.0-or-later; the GENIE-linked program is a combined GPL-3.0-or-later work). aegir never links this code — phlex discovers the plugin at run time via `PHLEX_PLUGIN_PATH`.
+
+Repository: [ShipSoft/aegir-genie](https://github.com/ShipSoft/aegir-genie)
+
+API reference: [Doxygen](https://shipsoft.github.io/aegir-genie/)
