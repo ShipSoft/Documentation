@@ -36,6 +36,10 @@ the [Geometry Service](../geometry_service/index.md) and
 - Pythia8 fixed-target p–p generation, serial or `PythiaParallel` (`pythia8_source`)
 - Dual-target generation with p–p / p–n interaction-point sampling based on the
   material Z/A (`fixed_target_source`)
+- GENIE neutrino interaction generation via the separate
+  [aegir-genie](https://github.com/ShipSoft/aegir-genie) phlex plugin
+  (`genie_source`); packaged cross-section splines pending — see
+  [GENIE neutrino generation](#genie-neutrino-generation) below
 
 **Geometry** (selectable per workflow)
 
