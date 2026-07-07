@@ -20,7 +20,7 @@ the cases source dependencies can't cover yet.
 All workflows here assume sibling checkouts under a common parent, plus
 one shared directory for locally built packages:
 
-```
+```text
 SHiP/
 ├── aegir/
 ├── data-model/

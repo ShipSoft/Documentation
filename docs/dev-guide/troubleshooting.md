@@ -2,7 +2,7 @@
 
 ## `lock-file not up-to-date` in an unrelated environment
 
-```
+```text
 × lock-file not up-to-date with the workspace
 ```
 
