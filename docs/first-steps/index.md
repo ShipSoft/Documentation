@@ -115,7 +115,6 @@ For a first contribution, prefer something small and observable. Good first task
 - Check whether your task needs AFS, EOS, CERNBox, CVMFS, SWAN, or batch access.
 - Reproduce one small documented command or workflow.
 - Record the commands, software versions, input files, and output location.
-- Agree on the first review or meeting date with your supervisor.
 
 ## 7. Know where to ask
 
