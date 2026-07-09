@@ -2,6 +2,10 @@
 
 Welcome to the documentation for the [SHiP experiment](https://ship.web.cern.ch/) software.
 
+## First Steps:
+
+If you're only joining SHiP and/or CERN, please start from **[Onboarding](first-steps/index.md)** page.
+
 ## Projects
 
 - **[FairShip](fairship/index.md)** — Simulation and reconstruction framework
