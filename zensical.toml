@@ -29,6 +29,7 @@ nav = [
   { "Data Model" = "data-model/index.md" },
   { "Developer Guide" = [
     { "Overview" = "dev-guide/index.md" },
+    { "Linting & git hooks" = "dev-guide/linting-and-hooks.md" },
     { "Multi-package development" = "dev-guide/multi-package.md" },
     { "Testing dependency PRs" = "dev-guide/testing-dependency-prs.md" },
     { "Troubleshooting" = "dev-guide/troubleshooting.md" },
