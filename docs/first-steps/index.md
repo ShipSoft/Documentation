@@ -56,7 +56,7 @@ Most SHiP software work eventually touches CERN computing services. You do not n
 
 ### AFS access at CERN
 
-AFS is CERN's authenticated shared filesystem for Unix-style home directories and some collaboration areas. On CERN-managed Linux machines and on LXPLUS, AFS is normally mounted for you. You can check, whether you already subscribed to AFS on CERN Computing Resouces Portal: https://resources-portal.web.cern.ch/. 
+AFS is CERN's authenticated shared filesystem for Unix-style home directories and some collaboration areas. On CERN-managed Linux machines and on LXPLUS, AFS is normally mounted for you. You can check whether you are already subscribed to AFS in the CERN Computing Resources Portal: https://resources-portal.web.cern.ch/.
 
 If you are subscribed, the usual first check will be:
 ```bash
