@@ -88,3 +88,6 @@ permalink = true
 anchor_linenums = true
 
 [project.markdown_extensions.pymdownx.superfences]
+
+[project.markdown_extensions.pymdownx.quotes]
+callouts = true
