@@ -23,4 +23,4 @@ pixi run python macro/run_simScript.py --tag my-simulation
 ```
 
 See [Installation](installation.md) for the full details, including the
-legacy CVMFS + aliBuild path for releases ≤26.04.
+legacy CVMFS + aliBuild path (the default up to release 26.05).
