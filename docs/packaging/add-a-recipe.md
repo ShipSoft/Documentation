@@ -9,7 +9,7 @@
 2. Edit `recipes/<new-pkg>/recipe.yaml`:
    - `context.version` — current upstream release.
    - `source.url` — tarball URL (GitHub `archive/refs/tags/`, GitLab
-     CERN `archive`, etc.). Use the same template variables as the
+     CERN `-/archive/`, etc.). Template it on `${{ version }}` like the
      surrounding recipes so [Renovate](bump-a-version.md) can update
      it automatically.
    - `source.sha256` — `curl -fsSL <url> | sha256sum`.
@@ -26,38 +26,67 @@
    - `extra.recipe-maintainers:` — your GitHub handle, plus at least
      one co-maintainer where possible.
 
-3. Adjust `recipes/<new-pkg>/build.sh` for the build system in use.
+3. Adjust the build script for the build system in use. Most recipes
+   have a `build.sh`; noarch and simple packages (for example `ganga`,
+   `genie-data`, `field-service`) put the script inline in
+   `recipe.yaml` instead.
 
-4. From the repo root, dry-run the build locally:
+4. If the package links ROOT, add a `variants.yaml` with
+   `root_cxx_standard` and the shared `root_base` pin. Copy it from a
+   sibling such as `recipes/fairship/variants.yaml`; see
+   [ROOT C++ standard variants](index.md#root-c-standard-variants).
+
+5. From the repo root, dry-run the build locally:
 
     ```bash
     pixi run rattler-build build --recipe recipes/<new-pkg> \
         --channel https://prefix.dev/ship --channel conda-forge
     ```
 
-5. Open a PR. CI runs `pixi run build-all`
-   (`rattler-build build --recipe-dir recipes/ --skip-existing=all`),
-   which rebuilds every recipe whose dependencies changed. Uploads to
-   `prefix.dev/ship` are gated on push to `main`.
+6. Run the linters before you commit (see
+   [Linting](#linting) below):
 
-6. After merge, decide whether the recipe is an
+    ```bash
+    pixi run -e lint lint
+    ```
+
+7. Open a PR. CI calls the reusable
+   [`rattler-build-and-upload.yml`](ci-and-secrets.md#buildyml-build-and-upload)
+   workflow, which runs
+   `rattler-build build --recipe-dir recipes/ --skip-existing=all`
+   and so rebuilds every recipe that isn't on the channel yet. PR
+   builds don't upload; the built `.conda` files are attached to the
+   run as a `conda-packages` artifact for 7 days, so you can install
+   them for testing. Uploads to `prefix.dev/ship` happen only on push
+   to `main`.
+
+8. After merge, decide whether the recipe is an
    [upstream candidate](https://github.com/ShipSoft/ship-conda-recipes/blob/main/README.md#packages)
    and update the table.
+
+## Linting
+
+`ship-conda-recipes` uses the same prek setup as the other SHiP
+repositories (see [Linting & git hooks](../dev-guide/linting-and-hooks.md)).
+Install the hooks once with `pixi run -e lint install-hooks`. The
+hooks run:
+
+- yamllint on every YAML file;
+- shellcheck on `recipes/*/build.sh`;
+- `reuse lint`, so new files need an SPDX licence header or an entry
+  in `REUSE.toml`;
+- the `variant-lockstep` check on `recipe.yaml` and `variants.yaml`;
+- commitizen on the commit message (Conventional Commits).
 
 ## Notes
 
 - Recipe directory name **must** equal the `package.name` in
   `recipe.yaml`. rattler-build's cross-recipe dependency resolution
   keys off the name in `requirements:`.
-- Don't add the recipe to a separate manifest file — there isn't
+- Don't add the recipe to a separate manifest file: there isn't
   one. The `requirements:` block is the single source of truth for
   dependency order.
-- For a single-recipe local iteration, run the inline form:
-
-    ```bash
-    pixi run rattler-build build --recipe recipes/<new-pkg> \
-        --channel https://prefix.dev/ship --channel conda-forge
-    ```
-
-  or, for the recipe currently most under churn, the `build-<name>`
-  pixi task shortcut.
+- For the recipe currently under the most churn there is a
+  `build-<name>` pixi task shortcut (at the moment `build-aegir`).
+  `pixi run build-all` builds the whole channel locally the same way
+  CI does.
