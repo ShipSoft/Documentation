@@ -2,7 +2,9 @@
 
 ## Git workflow
 
-We use a fork-based workflow. The steps are:
+We use a fork-based workflow. If you are new to Git or GitHub, read the
+[Git tutorial for SHiP](https://github.com/ShipSoft/FairShip/wiki/Git-Tutorial-for-SHiP)
+first. The steps are:
 
 1. **Fork** [ShipSoft/FairShip](https://github.com/ShipSoft/FairShip) on GitHub.
 2. **Clone** your fork locally:
@@ -22,7 +24,7 @@ We use a fork-based workflow. The steps are:
 
     ```bash
     git fetch official
-    git rebase official/master
+    git rebase official/main
     ```
 
 5. **Create a branch for your work:**
@@ -41,12 +43,48 @@ We use a fork-based workflow. The steps are:
 
 ### Commit messages
 
-- Write a short (< 72 characters) summary on the first line.
+Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/),
+for example `fix(veto): correct the SBT segment numbering` or
+`docs: update the README`. The `commit-msg` hook installed below checks
+this when you commit, and CI checks it again on the pull request.
+
+- Keep the summary line short (< 72 characters).
 - Optionally add a blank line followed by a more detailed explanation.
 - Code must at least compile before you open a PR.
+- Add an entry to the `Unreleased` section of `CHANGELOG.md` for any
+  change users or developers will notice. The pull request template asks
+  for it.
+
+### Linting and git hooks
+
+FairShip runs its linters through [prek](https://github.com/j178/prek)
+with the tools from the pixi `lint` environment: ruff, clang-format,
+cpplint, codespell, pyupgrade, mypy, reuse, gersemi, yamlfmt and
+commitizen. Install the hooks once per clone and run them on the whole
+tree with:
+
+```bash
+pixi run install-hooks
+pixi run lint
+```
+
+See [Linting & git hooks](../dev-guide/linting-and-hooks.md) for details.
+
+### AI-assisted contributions
+
+AI-assisted contributions are welcome under the rules in
+[`AI_POLICY.md`](https://github.com/ShipSoft/FairShip/blob/main/AI_POLICY.md).
+In short: say which tool or model you used, review and understand
+everything you submit, and answer reviewers yourself. AI tools cannot be
+co-authors; credit them with a trailer instead:
+
+```text
+Assisted-by: <harness>:<model>
+```
 
 ## C++ guidelines
 
+The FairShip wiki has the full [C++ guidelines](https://github.com/ShipSoft/FairShip/wiki/CPP-guidelines).
 See also the [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines).
 
 ### General
@@ -67,6 +105,7 @@ See also the [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/Cp
 
 ## Python guidelines
 
+The FairShip wiki has the full [Python guidelines](https://github.com/ShipSoft/FairShip/wiki/Python-guidelines).
 See also the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html).
 
 ### General
