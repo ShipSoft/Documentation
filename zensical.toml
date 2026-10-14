@@ -21,6 +21,7 @@ nav = [
     { "Installation" = "simulation/installation.md" },
     { "Samples" = "simulation/samples.md" },
     { "Running" = "simulation/running.md" },
+    { "GENIE neutrinos" = "simulation/genie.md" },
     { "Development" = "simulation/development.md" },
     { "FAQ" = "simulation/faq.md" },
   ] },
