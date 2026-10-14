@@ -11,10 +11,14 @@ existing simulations), consume the pre-built `aegir` package from the
 ```bash
 pixi init my-aegir-workspace
 cd my-aegir-workspace
-pixi project channel add https://prefix.dev/ship-experiment/stable
+pixi workspace channel add https://prefix.dev/ship-experiment/stable
 pixi add aegir
 pixi run phlex -c <path-to-workflow>.jsonnet
 ```
+
+The package installs its example workflows under
+`$CONDA_PREFIX/share/aegir/workflows/`. Copy one into your workspace as a
+starting point, together with `lib.libsonnet`, which most of them import.
 
 ## Building from source
 

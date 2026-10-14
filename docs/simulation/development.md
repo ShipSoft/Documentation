@@ -4,7 +4,7 @@
 
 We use a fork-based workflow. The steps are:
 
-1. **Fork** [ShipSoft/Aegir](https://github.com/ShipSoft/aegir) on GitHub.
+1. **Fork** [ShipSoft/aegir](https://github.com/ShipSoft/aegir) on GitHub.
 2. **Clone** your fork locally:
 
     ```bash
@@ -22,7 +22,7 @@ We use a fork-based workflow. The steps are:
 
     ```bash
     git fetch official
-    git rebase official/master
+    git rebase official/main
     ```
 
 5. **Create a branch for your work:**
@@ -49,6 +49,30 @@ See also the [commit conventions](https://www.conventionalcommits.org).
 
 The commit will be used to automatically generate the changelog for all projects of the new software framework, including aegir, such that the commit conventions will be strictly enforced. 
 Comments using the chore scope are excluded from the CHANGELOG.md by default.
+
+## Hooks and linting
+
+aegir uses [prek](https://github.com/j178/prek) hooks, with the tools taken
+from the pixi `lint` environment. Install them once per clone:
+
+```bash
+pixi run install-hooks
+```
+
+This sets up a pre-commit hook for formatting and linting, and a commit-msg
+hook that checks the Conventional Commits format. Run all hooks by hand with
+`pixi run lint`.
+
+C++ is also checked with clang-tidy. CI reports findings only on the lines a
+PR changes. Check your changes locally with `pixi run clang-tidy-diff`. After
+editing a header, run `pixi run clang-tidy` on the whole tree, because the
+diff task cannot see header-only changes.
+
+See [Linting & git hooks](../dev-guide/linting-and-hooks.md) for the setup
+shared by all SHiP repositories, and
+[CONTRIBUTING.md](https://github.com/ShipSoft/aegir/blob/main/CONTRIBUTING.md)
+for the full contribution rules.
+
 
 ## C++ guidelines
 

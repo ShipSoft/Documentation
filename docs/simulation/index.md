@@ -2,12 +2,8 @@
 
 Aegir is the simulation framework for the SHiP experiment.
 
-It is based on:
-
-- [Phlex](https://github.com/Framework-R-D/phlex)
-- [ROOT](https://root.cern/)
-- [Geant4](https://geant4.web.cern.ch/)
-- [Pythia8](https://pythia.org/)
+It is built on [Phlex](https://github.com/Framework-R-D/phlex), [ROOT](https://root.cern/),
+[Geant4](https://geant4.web.cern.ch/) and [Pythia8](https://pythia.org/).
 
 Repository: [ShipSoft/aegir](https://github.com/ShipSoft/aegir)
 
@@ -24,6 +20,19 @@ pixi run phlex -c workflows/pythia8_mt.jsonnet
 
 See [Installation](installation.md) for details.
 
+## Requirements
+
+pixi installs everything for you. For reference, aegir 0.4 needs:
+
+- [Phlex](https://github.com/Framework-R-D/phlex) 0.4.1 or later
+- [ROOT](https://root.cern/) 6.40 or later, built for C++23
+- [Geant4](https://geant4.web.cern.ch/) 11.3 or later, with multi-threading
+- [Pythia8](https://pythia.org/) 8.312 or later
+- the SHiP packages [data-model](../data-model/index.md),
+  [Geometry Service](../geometry_service/index.md),
+  [Field Service](../field_service/index.md) and
+  [ship-random](https://github.com/ShipSoft/ship-random)
+
 ## Features
 
 The following capabilities are already implemented in aegir or provided through
@@ -36,10 +45,15 @@ the [Geometry Service](../geometry_service/index.md) and
 - Pythia8 fixed-target p–p generation, serial or `PythiaParallel` (`pythia8_source`)
 - Dual-target generation with p–p / p–n interaction-point sampling based on the
   material Z/A (`fixed_target_source`)
-- GENIE neutrino interaction generation via the separate
-  [aegir-genie](https://github.com/ShipSoft/aegir-genie) phlex plugin
-  (`genie_source`); packaged cross-section splines pending — see
-  [GENIE neutrino generation](#genie-neutrino-generation) below
+- Pre-generated events read back from an RNTuple file (`file_source`), the
+  equivalent of FairShip's MuonBackGenerator. It accepts `MCParticle` and
+  `SimParticle` input, so aegir output can be fed into a new job.
+- GENIE rootracker files read without linking GENIE (`genie_reader_source`)
+- GENIE neutrino interactions generated in-process by the separate
+  [aegir-genie](genie.md) plugin (`genie_source`)
+- Every source publishes an `EventHeader` (event weight and provenance) next
+  to its particles, and can record the full generator history including all
+  mothers
 
 **Geometry** (selectable per workflow)
 
@@ -50,7 +64,8 @@ the [Geometry Service](../geometry_service/index.md) and
 
 **Magnetic field** (via the Field Service)
 
-- covfie-backed field maps, configured per magnet from the workflow (`field_covfie_provider`)
+- Field maps in the SHiP field-map format (RNTuple), configured per magnet
+  from the workflow (`field_map_provider`)
 - Field-off / null provider (`field_null_provider`)
 
 **Transport & simulation**
@@ -61,13 +76,16 @@ the [Geometry Service](../geometry_service/index.md) and
 
 **Output**
 
-- RNTuple output of `MCParticle` collections with parallel writing (`sim_output_module`)
+- RNTuple output with parallel writing (`sim_output_module`): generator
+  particles (`mc_particles`) and, for full simulation, hits (`sim_hits`) and
+  transported particles (`sim_particles`)
 - Validation histograms (ROOT 7)
 
 **Workflows**
 
-- Ready-to-run Phlex jsonnet workflows for gun, Pythia8 and fixed-target setups
-  in single-threaded / multi-threaded / generator-only variants (`workflows/`)
+- Ready-to-run Phlex jsonnet workflows for gun, Pythia8, fixed-target and
+  file-input setups in single-threaded / multi-threaded / generator-only
+  variants (`workflows/`)
 
 ## Three steps to target simulation
 1. Collide proton beam at 400 GeV on fixed protons and neutrons using Pythia8
@@ -87,10 +105,5 @@ Once the target simulation is produced, particles (such as muons) can be further
 
 ## GENIE neutrino generation
 
-Neutrino interactions are generated with [aegir-genie](https://github.com/ShipSoft/aegir-genie), a phlex source plugin that embeds the [GENIE](https://www.genie-mc.org/) event generator. Rather than the multi-step FairShip command-line pipeline (`gmkspl` → `gevgen` → `gntpc` → vertex re-placement), the plugin drives a `genie::GMCJDriver` directly: it convolves the SHiP neutrino flux with cross-section splines and the detector geometry, placing interaction vertices consistently with the material the simulation tracks through, with built-in protons-on-target accounting.
-
-Because GENIE is GPL-licensed, everything that links it lives in the separate `aegir-genie` repository (the SHiP-authored source is LGPL-3.0-or-later; the GENIE-linked program is a combined GPL-3.0-or-later work). aegir never links this code — phlex discovers the plugin at run time via `PHLEX_PLUGIN_PATH`.
-
-Repository: [ShipSoft/aegir-genie](https://github.com/ShipSoft/aegir-genie)
-
-API reference: [Doxygen](https://shipsoft.github.io/aegir-genie/)
+Neutrino interactions come from the separate [aegir-genie](https://github.com/ShipSoft/aegir-genie)
+plugin. See [GENIE neutrino generation](genie.md).
