@@ -8,9 +8,10 @@ This is a compact starting page for a student joining SHiP work at CERN. It is n
 ## 1. Understand where your work fits
 
 Start by reading the public [SHiP website](https://ship.web.cern.ch/) and the [SHiP software documentation](https://shipsoft.github.io/Documentation/). You do not need to understand every detector or software component on day one.
-For software work, also check the [ShipSoft GitHub organization](https://github.com/ShipSoft). Public documentation and public repositories are good entry points, while internal material may require CERN or collaboration access.
+For software work, also check the [ShipSoft GitHub organization](https://github.com/ShipSoft). The main simulation and reconstruction framework today is [FairShip](../fairship/index.md). Public documentation and public repositories are good entry points, while internal material may require CERN or collaboration access.
 
-A few articles to introduce you to SHiP.
+A few articles to introduce you to SHiP:
+
 - [The SHiP experiment at the proposed CERN SPS Beam Dump Facility](https://arxiv.org/pdf/2112.01487)
 
 ## 2. Sort out CERN registration
@@ -89,6 +90,8 @@ For general HEP software skills, use the [HSF Training Center](https://hsf-train
 
 For ROOT, start from the official [ROOT@CERN Learn page](https://root.cern/learn/), which links to the current ROOT courses, exercises, tutorials, manual, API documentation, and ROOT forum. The ROOT courses can be run through SWAN if you have a CERN computing account.
 
+The [ShipSoft tutorials](https://github.com/ShipSoft/tutorials) repository has slides from earlier SHiP software tutorials. They date from 2024, so commands and paths in them may be out of date; check them against this documentation.
+
 ## 5. Set up your first technical task
 
 Do not begin by trying to configure every possible CERN and SHiP tool. Start from one reproducible task agreed with your supervisor.
@@ -97,7 +100,7 @@ Write down:
 
 - The goal: for example, reproduce a simulation step, update documentation, test geometry configuration, make a validation plot, or prepare a short note.
 - The repository or documentation page involved.
-- The expected output: merge request, plot, log file, presentation, dataset, or written summary.
+- The expected output: pull request, plot, log file, presentation, dataset, or written summary.
 - The environment: laptop, LXPLUS, container, CVMFS release, or CI.
 - The review path: supervisor, working group, repository maintainer, or SHiP contact.
 
@@ -125,5 +128,5 @@ Use the narrowest support path that fits the problem:
 | Project scope, physics goal, review expectations | Your supervisor or SHiP working group |
 | CERN registration, contracts, access cards, local life | [CERN Users Office](https://usersoffice.web.cern.ch/) |
 | CERN service incident or access problem | [CERN Service Portal](https://cern.service-now.com/service-portal) |
-| Repository permissions or merge-request review | Repository maintainers or your SHiP contact |
+| Repository permissions or pull-request review | Repository maintainers or your SHiP contact |
 | Software setup, simulation, geometry, packaging | [SHiP software documentation](https://shipsoft.github.io/Documentation/), [SHiP software Mattermost Channel](https://mattermost.web.cern.ch/ship/channels/software)|
