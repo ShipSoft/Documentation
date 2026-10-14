@@ -2,29 +2,51 @@
 
 Most recipes track upstream tags via
 [Renovate](https://github.com/ShipSoft/ship-conda-recipes/blob/main/renovate.json).
-A weekend cron opens a PR per upstream release; review the diff,
-merge if CI is green, and the new build flows to `prefix.dev/ship-experiment/stable`.
+Renovate runs at weekends and opens one PR per upstream release; review
+the diff, merge if CI is green, and the new build flows to
+`prefix.dev/ship-experiment/stable`.
 
 ## Renovate-managed recipes
 
-The `customManagers` in `renovate.json` cover three patterns:
+`renovate.json` extends the shared ShipSoft preset
+(`local>ShipSoft/.github`) and adds two `customManagers`, which read
+`context.version` together with the source URL:
 
-- GitHub tags via `archive/refs/tags/v<X>.tar.gz` URLs.
-- GitHub tags via templated `context.version` + `archive/` URLs.
-- GitLab CERN tags via templated `context.version` +
-  `archive/` URLs.
+- GitHub sources: `url: https://github.com/<org>/<repo>/archive/…`
+  (this includes `archive/refs/tags/`), looked up as GitHub tags.
+- GitLab CERN sources: `url: https://gitlab.cern.ch/<group>/<project>/-/archive/…`,
+  looked up as GitLab tags.
 
-If you copy a sibling recipe ([Add a new recipe](add-a-recipe.md))
-its source URL will already match one of these patterns and Renovate
-will pick it up automatically.
+A leading `v` on the tag is stripped. If you copy a sibling recipe
+([Add a new recipe](add-a-recipe.md)), its source URL already matches
+one of these patterns and Renovate picks it up automatically.
 
-When Renovate opens a PR, check that:
+When Renovate opens a PR, the `finalize-renovate-pr.yml` workflow runs
+`ci/finalize-recipe-bump.sh` on the changed recipes. It downloads the
+new tarball and pushes a follow-up commit with the refreshed
+`source.sha256`. It skips recipes with more than one source URL (such
+as `field-service`, which also fetches covfie); fix those hashes by
+hand.
 
-- `build.number` was reset to `0`. Renovate doesn't reset it; you
-  may need to edit the PR.
-- `source.sha256` was bumped. Renovate doesn't refresh hashes for
-  every pattern; if the PR fails to build with a hash mismatch,
-  copy the expected SHA from the rattler-build error and push it.
+Still check that `build.number` was reset to `0`. Neither Renovate nor
+the finalize step touches it.
+
+## Releasing a SHiP package
+
+SHiP's own packages (aegir, shipdatamodel, shipgeometry,
+shipgeometryservice, field-service, shannon, trout, ship-random, …)
+follow the same route:
+
+1. Tag the release in the source repository (`v<X.Y.Z>`). Its
+   `release.yml` calls the shared release workflow, which writes the
+   release notes with git-cliff and creates the GitHub release.
+2. At the next weekend run, Renovate opens the version bump in
+   `ship-conda-recipes`.
+3. Merge it once CI is green. The package is uploaded on push to
+   `main`.
+
+To get the package out sooner, open the bump PR yourself: edit
+`context.version`, reset `build.number`, and update `source.sha256`.
 
 ## Dev twins and `[package].version`
 
@@ -33,45 +55,55 @@ the [developer workflow](../dev-guide/index.md) and must be bumped in
 the same breath:
 
 - the `[package].version` in the source repo's `pixi.toml`
-  (data-model, Geometry, geometry_service) — source-built dev packages
+  (data-model, Geometry, geometry_service): source-built dev packages
   must carry the released version or `run_exports` pins stop
   resolving;
-- `field_service/recipe/recipe.yaml` — dev twin of
+- `field_service/recipe/recipe.yaml`, the dev twin of
   `recipes/field-service/recipe.yaml`;
-- `ship-conda-recipes/recipes-dev/phlex/` — dev twin of the
+- `ship-conda-recipes/recipes-dev/phlex/`, the dev twin of the
   conda-forge phlex feedstock recipe.
 
-## Branch-pinned recipes (manual)
+## Pinned recipes (manual)
 
-A few recipes pin a branch or commit instead of a release tag.
-These are disabled in `renovate.json`:
+Renovate is disabled in `renovate.json` for sources that don't follow
+upstream release tags:
 
-- `SHiP/FairShip`
-- `ShipSoft/data-model`
-- `ShipSoft/geometry_service`
-- `SND-LHC/pythia6`
-- `luketpickering/ROOTEGPythia6`
+- `ShipSoft/pythia6` and `ShipSoft/ROOTEGPythia6`: ShipSoft forks
+  built from fork tags (`context.tag`, e.g. `v6.4.28-ship1`).
+- `webbjm/acts`: `acts-ship` is built from a commit
+  (`archive/${{ commit }}.tar.gz`).
+- `acts-project/covfie`: the second source of `field-service`, pinned
+  to the tag that field_service's `CMakeLists.txt` fetches.
 
 To bump one:
 
 1. Edit `recipes/<pkg>/recipe.yaml`:
-   - `context.version` — the new short SHA or branch name.
-   - `source.url` — point at the new commit (`archive/<sha>.tar.gz`).
-   - `source.sha256` — recompute.
-2. Bump `build.number` if the upstream change doesn't change the
-   version string but should produce a fresh package.
+   - the `context` field the URL is built from (`tag`, `commit` or
+     the hard-coded covfie version), and `context.version` if it
+     changes;
+   - `source.sha256`: recompute.
+2. Bump `build.number` if the version string stays the same but
+   should produce a fresh package.
 3. Open a PR.
 
 ## ABI rebuilds across the channel
 
-When an ABI break lands in an upstream conda-forge package
-(`root` major version, `geant4` major version, `libstdcxx`, etc.):
+When conda-forge moves past a pin baked into a published SHiP package
+(a new `root` or `geant4` build, for example), the weekly
+[channel-drift job](ci-and-secrets.md#channel-driftyml-weekly-drift-check)
+notices. It opens a `channel-drift` PR that bumps `build.number` on
+every affected recipe. Moving the `root_base` pin itself comes as a
+separate `variant-drift` PR. Merging either one rebuilds and
+re-uploads the affected packages.
+
+To rebuild by hand, for example for a change the drift check can't
+see:
 
 1. Bump `build.number` on every recipe that links the affected
-   library. The current build numbers serve as the rebuild signal.
-2. Trigger `workflow_dispatch` on `build.yml`. The
-   `--skip-existing=all` flag will pick up the bumped build numbers
-   as new packages to build and skip the rest.
+   library.
+2. Merge, or trigger `workflow_dispatch` on `build.yml`.
+   `--skip-existing=all` builds the bumped build numbers as new
+   packages and skips the rest.
 
 For a smaller, targeted rebuild of a single recipe, use the
 `recipe` and `force` inputs to `workflow_dispatch` (see
