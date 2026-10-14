@@ -37,7 +37,7 @@ Add `ship-random` from [prefix.dev/ship](https://prefix.dev/channels/ship),
 then in CMake:
 
 ```cmake
-find_package(SHiPRandom 0.1 REQUIRED)
+find_package(SHiPRandom 0.2 REQUIRED)
 target_link_libraries(my_target PRIVATE SHiP::Random)
 ```
 
