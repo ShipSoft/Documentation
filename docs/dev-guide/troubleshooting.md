@@ -16,7 +16,8 @@ run a default-environment task untouched — use `--frozen` instead of
 ## Solver conflicts when mixing source and binary packages
 
 Binary SHiP packages pin each other through `run_exports` (e.g. the
-released `shipgeometryservice` requires `shipdatamodel >=0.1.0,<0.2`).
+released `shipgeometryservice` requires `shipgeometry >=0.2.1,<0.3`,
+and the released aegir 0.4.0 requires `shipdatamodel >=0.5.0,<0.6`).
 If a source checkout's `[package].version` has drifted from the last
 release, those pins become unsatisfiable and the solve fails (or
 silently keeps the binary package). Fix the version in the checkout's
