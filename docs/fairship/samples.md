@@ -2,7 +2,7 @@
 
 Current samples are located on CERN EOS:
 
-```
+```text
 /eos/experiment/ship/simulation/bkg/
 ```
 
@@ -10,7 +10,7 @@ Current samples are located on CERN EOS:
 
 - Mbias2025:
     - Description: Series of files generated at CERN in December 2025. Note that the parent of the particles cannot be accessed in these samples, due to a bug in FairShip 25.12
-    - Geometry: default geometry (`$FAIRSHIP/geometry/target_config_Jun25.yaml`) version from FairShip 25.12 -- example file on `root://eospublic.cern.ch//eos/experiment/ship/simulation/bkg/Mbias2025/CERN_combined_weighted/geofile_full.root`
+    - Geometry: default geometry ([`geometry/target_config_Jun25.yaml`](https://github.com/ShipSoft/FairShip/blob/25.12/geometry/target_config_Jun25.yaml), which only exists up to FairShip 25.12) -- example file on `root://eospublic.cern.ch//eos/experiment/ship/simulation/bkg/Mbias2025/CERN_combined_weighted/geofile_full.root`
     - Stack: FairShip 25.12 (`/cvmfs/ship.cern.ch/25.12/setUp.sh`)
     - Number of events:
         - `root://eospublic.cern.ch//eos/experiment/ship/simulation/bkg/Mbias2025/CERN_combined_weighted/33`: small production with energy cut at 1.0 GeV (0.526E8 PoTs)
@@ -25,9 +25,12 @@ Current samples are located on CERN EOS:
         - `root://eospublic.cern.ch//eos/experiment/ship/simulation/bkg/Mbias2026/CERN/merged/ecut5GeV_dimuonboost100` (~2.8 billion PoTs)
         - `root://eospublic.cern.ch//eos/experiment/ship/simulation/bkg/Mbias2026/GridPP/merged/ecut30GeV_dimuonboost1` (~12.0 billion PoTs)
         - `root://eospublic.cern.ch//eos/experiment/ship/simulation/bkg/Mbias2026/GridPP/merged/ecut70GeV_dimuonboost1` (~8.5 billion PoTs)
-- MuonBack_2024helium:
-- MuonDIS:
-- MuonDIS_2024helium:
-- NeutrinoDIS_2024helium:
-- NeutrinoDIS_2024helium_noCavern:
-- NeutrinoDIS_2024helium_noCavern_v2:
+
+The following subfolders are not documented here yet: `MuonBack_2024helium`,
+`MuonDIS`, `MuonDIS_2024helium`, `NeutrinoDIS_2024helium`,
+`NeutrinoDIS_2024helium_noCavern` and `NeutrinoDIS_2024helium_noCavern_v2`.
+
+On current FairShip, `$FAIRSHIP/geometry/target_config.yaml` is still the
+default target configuration. The 2026 BDF target design is in
+`target_config_2026.yaml` and has to be selected explicitly; see
+[Configuration](configuration.md).
