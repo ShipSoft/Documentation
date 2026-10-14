@@ -13,10 +13,10 @@ Other distributions may be available upon sufficient interest.
 
 The `lbenv` tool can break the SHiP software stack. Configure `lbenv` to prevent automatic loading. With the right configuration, both LHCb and SHiP software can coexist in the same account.
 
-## Legacy aliBuild issues (CVMFS releases ≤26.04)
+## Legacy aliBuild issues (CVMFS releases)
 
 These FAQs only apply to the legacy aliBuild path — see
-[Installation → Legacy releases](installation.md#legacy-releases-cvmfs-alibuild-2604).
+[Installation → Legacy releases](installation.md#legacy-releases-cvmfs-alibuild).
 
 ### aliBuild not using system/CVMFS packages
 
