@@ -25,6 +25,35 @@ the same and picks up further local edits.
 As always, discard the manifest and lock changes afterwards:
 `git checkout pixi.toml pixi.lock`.
 
+## In CI, without a local setup
+
+The [nightly dev builds](index.md#ci-coverage) in `ship-conda-recipes`
+take refs as `workflow_dispatch` inputs, so you can run a PR through
+them from the GitHub UI (Actions tab, "Run workflow") or with `gh`.
+This needs write access to `ship-conda-recipes`.
+
+`dev-source-build-aegir.yml` builds aegir's `dev` environment with
+data-model, Geometry and geometry_service from source. Each sibling
+defaults to its `main` branch; override any of them, and aegir itself,
+with a branch, tag or SHA:
+
+```console
+$ gh workflow run dev-source-build-aegir.yml -R ShipSoft/ship-conda-recipes \
+    -f data_model_ref=their-feature
+```
+
+The other inputs are `geometry_ref`, `geometry_service_ref` and `ref`
+(aegir). The checkouts are always from the ShipSoft repositories, so
+for a PR opened from a fork pass `refs/pull/<N>/head` instead of the
+branch name. The job runs `pixi run -e dev install` and
+`pixi run -e dev smoke` with a fresh lock.
+
+`dev-build-aegir.yml` and `dev-build-fairship.yml` take a single `ref`
+input for the aegir or FairShip revision and build it against the
+released packages currently on the channels, again with a fresh lock.
+That catches a PR that only works with the lock it was developed
+against.
+
 ## An upstream phlex PR
 
 phlex comes from conda-forge and has no pixi manifest, so it can't be
