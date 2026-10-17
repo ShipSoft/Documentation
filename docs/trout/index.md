@@ -46,5 +46,5 @@ pixi run smoke     # generate inputs in-tree and run workflows/smoke.jsonnet
 
 Trout depends on data-model, Geometry, geometry_service, field_service,
 ACTS and ship-random, all resolved from conda-forge and
-[prefix.dev/ship](https://prefix.dev/channels/ship). It is packaged as `trout`
+[prefix.dev/ship-experiment/stable](https://prefix.dev/channels/@ship-experiment/stable). It is packaged as `trout`
 on that channel.

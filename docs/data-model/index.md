@@ -27,7 +27,7 @@ per-detector hit types.
 ## Using it
 
 The conda package is `shipdatamodel` on
-[prefix.dev/ship](https://prefix.dev/channels/ship). In CMake:
+[prefix.dev/ship-experiment/stable](https://prefix.dev/channels/@ship-experiment/stable). In CMake:
 
 ```cmake
 find_package(SHiPDataModel REQUIRED)

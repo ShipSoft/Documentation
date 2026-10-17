@@ -36,7 +36,7 @@ pixi run test
 ## Using it
 
 The conda package is `shipgeometryservice` on
-[prefix.dev/ship](https://prefix.dev/channels/ship). In CMake:
+[prefix.dev/ship-experiment/stable](https://prefix.dev/channels/@ship-experiment/stable). In CMake:
 
 ```cmake
 find_package(SHiPGeometryService CONFIG REQUIRED)

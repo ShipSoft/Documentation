@@ -25,7 +25,7 @@ of 2026-10:
 | `doxygen-pages.yml` | Builds Doxygen and deploys it to GitHub Pages through Actions | aegir, aegir-genie, data-model, field_service, Geometry, geometry_service, Shannon, ship-random, Trout |
 | `doxygen-gh-pages.yml` | The same, published to a `gh-pages` branch | FairShip |
 | `physics-metrics.yml` | Stores physics metrics from `main` in git notes and compares PRs against them | aegir |
-| `rattler-build-and-upload.yml` | Builds conda recipes and uploads them to `prefix.dev/ship` | ship-conda-recipes (see [CI and secrets](../packaging/ci-and-secrets.md)) |
+| `rattler-build-and-upload.yml` | Builds conda recipes and uploads them to `prefix.dev/ship-experiment/stable` | ship-conda-recipes (see [CI and secrets](../packaging/ci-and-secrets.md)) |
 
 The workflows are referenced by `@main`, so a change in
 `ShipSoft/.github` reaches every caller on its next run.
@@ -114,7 +114,7 @@ release with a `scripts/release.sh` in the repository:
 
 The script's `--help` lists repository-specific steps (data-model, for
 example, also writes a frozen compatibility reference file). Getting
-the new version onto `prefix.dev/ship` is a separate step in
+the new version onto `prefix.dev/ship-experiment/stable` is a separate step in
 `ship-conda-recipes`; see [Bump a version](../packaging/bump-a-version.md).
 
 ## Physics metrics
