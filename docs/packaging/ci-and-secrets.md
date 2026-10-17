@@ -99,15 +99,18 @@ neutrino energy.
 
 ## Secrets
 
-- `PREFIX_DEV_API_KEY` — organisation secret. Used for
-  `rattler-build upload prefix` by `build.yml` (on push to `main`)
-  and `splines.yml`.
-  Provisioned in ShipSoft GitHub org → Settings → Secrets and
-  variables → Actions. Rotated from prefix.dev account settings.
+- Uploads to prefix.dev need no secret. `build.yml` and `splines.yml`
+  use trusted publishing: the job runs with `id-token: write` and
+  prefix.dev accepts its OIDC token in place of an API key.
+- `APP_CLIENT_ID` (variable) and `APP_PRIVATE_KEY` (secret) — the
+  credentials of a GitHub App. `finalize-renovate-pr.yml` creates a
+  short-lived app token from them and uses it to push the sha256
+  refresh commit. Workflows don't start on pushes made with
+  `GITHUB_TOKEN`, so the app token is what makes the build and lint
+  checks run on that commit.
 - `GITHUB_TOKEN` — default per-run token. It covers the PRs opened by
   `update-lock-files.yml`, `channel-snapshot.yml` and
-  `channel-drift.yml`, and the follow-up commit pushed by
-  `finalize-renovate-pr.yml`. No extra configuration needed.
+  `channel-drift.yml`. No extra configuration needed.
 
 ## Triggering a targeted rebuild
 

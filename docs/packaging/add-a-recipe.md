@@ -36,7 +36,7 @@
    sibling such as `recipes/fairship/variants.yaml`; see
    [ROOT C++ standard variants](index.md#root-c-standard-variants).
 
-5. From the repo root, dry-run the build locally:
+5. From the repo root, build the package locally:
 
     ```bash
     pixi run rattler-build build --recipe recipes/<new-pkg> \
