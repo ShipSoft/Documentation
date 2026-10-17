@@ -103,7 +103,9 @@ Each repository's `Lint` workflow calls two reusable workflows from
 A final `Lint passed` job aggregates the two, and that job is the one
 the branch ruleset requires. Because CI and your machine draw the hook
 tools from the same pinned `lint` environment, a green `pixi run lint`
-locally means a green lint job on the PR.
+locally means `prek.yml` will pass on the PR. It doesn't cover commit
+messages: the `commit-msg` hook checks those as you commit, and
+`commit-check.yml` checks them again on the PR.
 
 C++ repositories also call `clang-tidy.yml` from a separate workflow.
 It is a ratchet: on a pull request it fails only on findings in lines
