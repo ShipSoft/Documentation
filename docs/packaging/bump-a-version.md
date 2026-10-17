@@ -80,10 +80,12 @@ To bump one:
 1. Edit `recipes/<pkg>/recipe.yaml`:
    - the `context` field the URL is built from (`tag`, `commit` or
      the hard-coded covfie version), and `context.version` if it
-     changes;
+     changes. For `acts-ship`, a new commit always means a new
+     date-based version, `0.0.0.dev<YYYYMMDD>+<sha7>`;
    - `source.sha256`: recompute.
 2. Bump `build.number` if the version string stays the same but
-   should produce a fresh package.
+   should produce a fresh package. Reset it to `0` whenever
+   `context.version` changes.
 3. Open a PR.
 
 ## ABI rebuilds across the channel

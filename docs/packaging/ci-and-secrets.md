@@ -113,7 +113,7 @@ neutrino energy.
   with the `pixi update` diff.
 - `update-shared-configs.yml` calls the reusable `config-sync.yml` on
   the 1st of each month at 06:00 UTC and opens a PR when the files
-  shared across ShipSoft repositories (`AI_POLICY.md`, `cliff.toml`)
+  shared across ShipSoft repositories (by default only `AI_POLICY.md`)
   have changed.
 
 ## Secrets
