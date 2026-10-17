@@ -9,7 +9,7 @@ New development uses pixi and the conda-forge ecosystem instead:
 - [FairShip — Using pixi](../fairship/index.md)
 - [ship-conda-recipes](https://github.com/ShipSoft/ship-conda-recipes)
   — rattler-build recipes for the SHiP-specific packages, published to
-  the [prefix.dev/ship](https://prefix.dev/channels/ship) channel.
+  the [prefix.dev/ship-experiment/stable](https://prefix.dev/channels/@ship-experiment/stable) channel.
 
 For users on existing CVMFS releases, see
 [FairShip → Legacy releases](../fairship/installation.md#legacy-releases-cvmfs-alibuild-2604).

@@ -1,7 +1,7 @@
 # Packaging
 
 SHiP distributes its software stack as conda packages on the
-[`prefix.dev/ship`](https://prefix.dev/channels/ship) channel. Packages
+[`prefix.dev/ship-experiment/stable`](https://prefix.dev/channels/@ship-experiment/stable) channel. Packages
 that aren't on conda-forge are built from recipes in
 [`ShipSoft/ship-conda-recipes`](https://github.com/ShipSoft/ship-conda-recipes);
 everything else is pulled directly from
@@ -11,7 +11,7 @@ Downstream repos (`FairShip`, `aegir`, `geometry`, `geometry_service`)
 consume the channel via their `pixi.toml`:
 
 ```toml
-channels = ["https://prefix.dev/ship", "conda-forge"]
+channels = ["https://prefix.dev/ship-experiment/stable", "conda-forge"]
 ```
 
 ## Flow
@@ -24,9 +24,9 @@ ship-conda-recipes/recipes/<pkg>/recipe.yaml
         │   rattler-build build --recipe-dir recipes/
         ▼
 ship-conda-recipes/output/{linux-64,noarch}/*.conda
-        │   rattler-build upload prefix -c ship
+        │   rattler-build upload prefix -c ship-experiment/stable
         ▼
-prefix.dev/ship channel
+prefix.dev/ship-experiment/stable channel
         │
         ▼
 downstream repo's pixi.toml  →  developer / CI environment

@@ -10,15 +10,18 @@ Triggers on push to `main`, pull requests against `main`, and
 ```bash
 pixi run rattler-build build \
     --recipe-dir recipes/ \
-    --channel https://prefix.dev/ship \
+    --channel https://prefix.dev/ship-experiment/stable \
     --channel conda-forge \
     --skip-existing=all
 ```
 
 rattler-build resolves cross-recipe dependency order from the
 `requirements:` blocks; nothing else needs maintaining. On push to
-`main`, every `output/{linux-64,noarch}/*.conda` artifact is
-uploaded with `rattler-build upload prefix -c ship --skip-existing`.
+`main` and on manual dispatches from `main`, every
+`output/{linux-64,noarch}/*.conda` artifact is uploaded with
+`rattler-build upload prefix -c ship-experiment/stable --skip-existing`.
+The upload authenticates with trusted publishing (see
+[Secrets](#secrets)).
 
 PR builds run the same build step but **do not** upload.
 
@@ -32,17 +35,19 @@ Runs on the 1st of each month at 05:00 UTC and opens an
 ### `channel-snapshot.yml` — weekly channel inventory
 
 Mondays at 06:00 UTC. Fetches
-`https://prefix.dev/ship/{linux-64,noarch}/repodata.json`,
+`https://prefix.dev/ship-experiment/stable/{linux-64,noarch}/repodata.json`,
 renders `channel-snapshot.md`, and opens (or updates) a
 `channel-snapshot` PR if the contents changed. The diff is the
 changelog.
 
 ## Secrets
 
-- `PREFIX_DEV_API_KEY` — organisation secret. Used by
-  `rattler-build upload prefix` in `build.yml` on push to `main`.
-  Provisioned in ShipSoft GitHub org → Settings → Secrets and
-  variables → Actions. Rotated from prefix.dev account settings.
+- No prefix.dev API key. `build.yml`, `splines.yml` and
+  `nightly-main.yml` upload with trusted publishing: the jobs grant
+  `id-token: write`, and each workflow is registered as a trusted
+  publisher on its channel (`@ship-experiment/stable` or
+  `@ship-experiment/nightly`) in the prefix.dev channel settings. A
+  new workflow that uploads needs its own entry there.
 - `GITHUB_TOKEN` — default per-run token; sufficient for the
   `peter-evans/create-pull-request` calls in
   `update-lock-files.yml` and `channel-snapshot.yml`. No extra

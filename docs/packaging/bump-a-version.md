@@ -3,7 +3,7 @@
 Most recipes track upstream tags via
 [Renovate](https://github.com/ShipSoft/ship-conda-recipes/blob/main/renovate.json).
 A weekend cron opens a PR per upstream release; review the diff,
-merge if CI is green, and the new build flows to `prefix.dev/ship`.
+merge if CI is green, and the new build flows to `prefix.dev/ship-experiment/stable`.
 
 ## Renovate-managed recipes
 
