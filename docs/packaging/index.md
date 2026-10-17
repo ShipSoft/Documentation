@@ -78,11 +78,13 @@ recipes here build two variants. Two keys in the recipe's
   cxx20 variant serves consumers of the default ROOT builds, such as
   FairShip. The cxx23 variant serves the phlex/aegir stack.
 - `root_base` is pinned explicitly, to the same version in every
-  `variants.yaml`. Without the pin, the solver can fall back to a
-  legacy ROOT build from before the C++ standard split.
+  `variants.yaml` under `recipes/`. Without the pin, the solver can
+  fall back to a legacy ROOT build from before the C++ standard split.
 
 The `variant-lockstep` prek hook (`ci/check-variant-lockstep.py`)
-checks that all `variants.yaml` files carry the same `root_base` pin.
+checks that all `variants.yaml` files under `recipes/` carry the
+same `root_base` pin. The development recipes in `recipes-dev/` are
+not checked; `recipes-dev/phlex` pins `root_base` to `"6.40"`.
 When conda-forge moves ROOT past the pin, the weekly
 [channel-drift job](ci-and-secrets.md#channel-driftyml-weekly-drift-check)
 opens a `variant-drift` PR that advances it everywhere at once.

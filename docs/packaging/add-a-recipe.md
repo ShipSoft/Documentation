@@ -61,7 +61,8 @@
    [`rattler-build-and-upload.yml`](ci-and-secrets.md#buildyml-build-and-upload)
    workflow, which runs
    `rattler-build build --recipe-dir recipes/ --skip-existing=all`
-   and so rebuilds every recipe that isn't on the channel yet. PR
+   and skips every package whose exact build already exists in the
+   configured channels. PR
    builds don't upload; the built `.conda` files are attached to the
    run as `conda-packages-<platform>` artifacts for 7 days, so you can install
    them for testing. Uploads to `prefix.dev/ship-experiment/stable`
