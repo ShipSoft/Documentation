@@ -34,6 +34,14 @@ submission. Otherwise jobs repeat the same events and write files with
 the same names. The script picks a random starting run number and gives
 each subjob the next one, as the upstream production script does.
 
+The script also passes the run number as `--seed`, so the run number
+fixes the random sequence. (`run_fixedTarget.py` does not derive the
+seed from `-r` itself; without `--seed` it uses a time-based seed.) A
+random start only makes collisions unlikely. When you submit several
+jobs in parallel, give each one its own range of run numbers
+(`startRun` to `startRun + nSJ - 1`) that does not overlap with the
+others.
+
 ```python
 import os
 import random
