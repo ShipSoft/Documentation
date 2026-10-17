@@ -10,7 +10,7 @@ same hooks run in CI.
 The hook *tools* (`ruff`, `clang-format`, `codespell`, `reuse`,
 `gersemi`, …) come from a dedicated pixi `lint` environment, so their
 versions are pinned in `pixi.lock` and resolved from `conda-forge` /
-[`prefix.dev/ship`](https://prefix.dev/channels/ship). That means:
+[`prefix.dev/ship-experiment/stable`](https://prefix.dev/channels/@ship-experiment/stable). That means:
 
 - **No per-hook toolchain downloads** — prek does not fetch and build
   its own copies of the tools; it uses the ones pixi already provides.

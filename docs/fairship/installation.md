@@ -25,7 +25,7 @@ clone, so the pixi project root **must** be the FairShip clone itself.
     ```
 
 Pre-built FairShip packages are also published to the
-[prefix.dev/ship](https://prefix.dev/channels/ship) channel; see the
+[prefix.dev/ship-experiment/stable](https://prefix.dev/channels/@ship-experiment/stable) channel; see the
 [FairShip README](https://github.com/ShipSoft/FairShip#using-pixi) for
 that flow.
 

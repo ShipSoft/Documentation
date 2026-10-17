@@ -7,7 +7,7 @@ PR) underneath our stack.
 
 Every repo works out of the box in **binary mode**: `pixi install`
 resolves released packages from
-[`prefix.dev/ship`](https://prefix.dev/channels/ship) and conda-forge,
+[`prefix.dev/ship-experiment/stable`](https://prefix.dev/channels/@ship-experiment/stable) and conda-forge,
 and you only build the repo you're in. That's the default, and it's
 what CI uses. This guide is about the opt-in **source mode** on top of
 it, built on pixi's [source
@@ -67,7 +67,7 @@ ahead of the remote channels. See
 
 Releases still flow exclusively through
 [`ship-conda-recipes`](https://github.com/ShipSoft/ship-conda-recipes)
-and the `prefix.dev/ship` channel — nothing in this guide publishes
+and the `prefix.dev/ship-experiment/stable` channel — nothing in this guide publishes
 anything. Two files are deliberate *dev twins* of release recipes and
 must be kept in lockstep when [bumping a
 version](../packaging/bump-a-version.md):

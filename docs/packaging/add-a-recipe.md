@@ -32,13 +32,14 @@
 
     ```bash
     pixi run rattler-build build --recipe recipes/<new-pkg> \
-        --channel https://prefix.dev/ship --channel conda-forge
+        --channel https://prefix.dev/ship-experiment/stable --channel conda-forge
     ```
 
 5. Open a PR. CI runs `pixi run build-all`
    (`rattler-build build --recipe-dir recipes/ --skip-existing=all`),
    which rebuilds every recipe whose dependencies changed. Uploads to
-   `prefix.dev/ship` are gated on push to `main`.
+   `prefix.dev/ship-experiment/stable` happen only on `main` (push or
+   manual dispatch).
 
 6. After merge, decide whether the recipe is an
    [upstream candidate](https://github.com/ShipSoft/ship-conda-recipes/blob/main/README.md#packages)
@@ -56,7 +57,7 @@
 
     ```bash
     pixi run rattler-build build --recipe recipes/<new-pkg> \
-        --channel https://prefix.dev/ship --channel conda-forge
+        --channel https://prefix.dev/ship-experiment/stable --channel conda-forge
     ```
 
   or, for the recipe currently most under churn, the `build-<name>`

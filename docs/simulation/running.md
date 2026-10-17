@@ -19,7 +19,7 @@ manual prefix needed.
 
 If you do not need to modify the source, you can also consume the
 pre-built `aegir` package from the
-[prefix.dev/ship](https://prefix.dev/channels/ship) channel — see
+[prefix.dev/ship-experiment/stable](https://prefix.dev/channels/@ship-experiment/stable) channel — see
 [Installation](installation.md) for that flow.
 
 Information regarding the simulation to generate is located in the

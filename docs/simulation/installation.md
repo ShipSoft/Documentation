@@ -6,12 +6,12 @@ Aegir is built with [pixi](https://pixi.sh). Two use cases:
 
 If you only need to run workflows (e.g. update `.jsonnet` files, drive
 existing simulations), consume the pre-built `aegir` package from the
-[prefix.dev/ship](https://prefix.dev/channels/ship) channel:
+[prefix.dev/ship-experiment/stable](https://prefix.dev/channels/@ship-experiment/stable) channel:
 
 ```bash
 pixi init my-aegir-workspace
 cd my-aegir-workspace
-pixi project channel add https://prefix.dev/ship
+pixi project channel add https://prefix.dev/ship-experiment/stable
 pixi add aegir
 pixi run phlex -c <path-to-workflow>.jsonnet
 ```
