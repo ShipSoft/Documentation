@@ -8,7 +8,9 @@ Triggers on push to `main`, pull requests against `main`, the merge
 queue (`merge_group`) and `workflow_dispatch`. The workflow itself is
 a thin caller of the reusable
 [`rattler-build-and-upload.yml`](https://github.com/ShipSoft/.github/blob/main/.github/workflows/rattler-build-and-upload.yml)
-in `ShipSoft/.github`, which builds the whole channel with:
+in `ShipSoft/.github`. It runs one native job per platform listed in
+the `platforms` input (linux-64 on `ubuntu-latest`, linux-aarch64 on
+an arm64 runner), and each job builds the whole channel with:
 
 ```bash
 pixi run rattler-build build \
@@ -19,16 +21,18 @@ pixi run rattler-build build \
 ```
 
 rattler-build resolves cross-recipe dependency order from the
-`requirements:` blocks; nothing else needs maintaining. On push to
-`main` and on manual dispatches from `main`, each
-`output/{linux-64,noarch}/*.conda` file is uploaded with
+`requirements:` blocks; nothing else needs maintaining. Recipes that
+don't support a platform skip it (see [Platforms](index.md#platforms)).
+On push to `main` and on manual dispatches from `main`, each job
+uploads its `output/<platform>/*.conda` files, and the linux-64 job
+also uploads `output/noarch/`, with
 `rattler-build upload prefix -c ship-experiment/stable --skip-existing`.
 The upload authenticates with trusted publishing (see
 [Secrets](#secrets)).
 
 PR builds run the same build step but **do not** upload. The packages
-they produce are attached to the run as the `conda-packages` artifact
-(kept for 7 days). An `All checks passed` job aggregates the result
+they produce are attached to the run as one
+`conda-packages-<platform>` artifact per platform (kept for 7 days). An `All checks passed` job aggregates the result
 for branch protection.
 
 ### `lint.yml`: hooks and commit messages
@@ -59,7 +63,7 @@ Run it locally with `pixi run -e drift check-drift`.
 ### `channel-snapshot.yml`: weekly channel inventory
 
 Mondays at 06:00 UTC. Fetches
-`https://prefix.dev/ship-experiment/stable/{linux-64,noarch}/repodata.json`,
+`https://prefix.dev/ship-experiment/stable/{linux-64,linux-aarch64,noarch}/repodata.json`,
 renders `channel-snapshot.md`, and opens (or updates) a
 `channel-snapshot` PR if the contents changed. The diff is the
 changelog.
@@ -90,8 +94,9 @@ them to `prefix.dev/ship-experiment/nightly`. Each library builds
 against released dependencies only (stable channel and conda-forge),
 so a consumer can swap in exactly one `main` build. Consumer
 repositories use this channel for advisory PR jobs through the
-reusable `pixi-main-deps.yml`. `workflow_dispatch` takes `recipe` and
-`force` inputs.
+reusable `pixi-main-deps.yml`. Every library except the noarch
+ship-random is built for both linux-64 and linux-aarch64.
+`workflow_dispatch` takes `recipe` and `force` inputs.
 
 ### `splines.yml`: GENIE splines
 

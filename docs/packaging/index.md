@@ -28,7 +28,7 @@ upstream sources (GitHub / GitLab CERN tags)
 ship-conda-recipes/recipes/<pkg>/recipe.yaml
         │   rattler-build build --recipe-dir recipes/
         ▼
-ship-conda-recipes/output/{linux-64,noarch}/*.conda
+ship-conda-recipes/output/{linux-64,linux-aarch64,noarch}/*.conda
         │   rattler-build upload prefix -c ship-experiment/stable
         ▼
 prefix.dev/ship-experiment/stable channel
@@ -36,6 +36,25 @@ prefix.dev/ship-experiment/stable channel
         ▼
 downstream repo's pixi.toml  →  developer / CI environment
 ```
+
+## Platforms
+
+Every recipe is built for linux-64. The Amaru stack is also built for
+linux-aarch64: shipdatamodel, shipgeometry, shipgeometryservice,
+field-service, mp-units and the GENIE chain (genie, pythia6,
+rootegpythia6). osx-arm64 is planned.
+
+- aegir, aegir-genie, shannon and trout skip linux-aarch64 for now.
+  Their current releases need `shipdatamodel <0.6`, which has no
+  linux-aarch64 build. Each recipe drops the skip when it moves to a
+  release that supports data-model 0.6.
+- The FairShip stack (fairship, fairroot, geant3, genfit, photospp,
+  acts-ship) and npdb-client stay linux-64 only.
+- noarch packages are built once and uploaded from the linux-64 job.
+
+See the
+[ship-conda-recipes README](https://github.com/ShipSoft/ship-conda-recipes/blob/main/README.md#platforms)
+for the current list.
 
 ## Maintainer tasks
 

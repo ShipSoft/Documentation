@@ -17,6 +17,13 @@
      this package depends on by name. rattler-build resolves the
      build order from these lists, so this is the **only** place to
      express ordering.
+   - Compiled packages request the sysroot in `requirements.build`
+     as `if: linux` / `then: sysroot_${{ target_platform }} 2.17.*`,
+     not `${{ stdlib('c') }}`. `stdlib('c')` would change the hash of
+     every compiled package and rebuild the whole linux-64 channel.
+   - `build.skip` — if the package isn't meant for linux-aarch64, add
+     `target_platform != "linux-64"`. Otherwise the arm64 CI job
+     builds it too (see [Platforms](index.md#platforms)).
    - `tests:` — at minimum a `package_contents:` block listing the
      headers / libs / CMake configs the build is expected to produce.
      For runtime-executable packages add a `script:` test that runs
@@ -56,7 +63,7 @@
    `rattler-build build --recipe-dir recipes/ --skip-existing=all`
    and so rebuilds every recipe that isn't on the channel yet. PR
    builds don't upload; the built `.conda` files are attached to the
-   run as a `conda-packages` artifact for 7 days, so you can install
+   run as `conda-packages-<platform>` artifacts for 7 days, so you can install
    them for testing. Uploads to `prefix.dev/ship-experiment/stable`
    happen only on `main` (push or manual dispatch).
 
