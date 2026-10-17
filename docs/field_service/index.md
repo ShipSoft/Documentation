@@ -29,7 +29,7 @@ a regular grid). A bare map filename is resolved against
 Request the components you need, e.g.
 `find_package(SHiPFieldService REQUIRED COMPONENTS G4Adapter MapIO)` in aegir
 or `COMPONENTS MapIO ActsAdapter` in Trout. All packages are on
-[prefix.dev/ship](https://prefix.dev/channels/ship).
+[prefix.dev/ship-experiment/stable](https://prefix.dev/channels/@ship-experiment/stable).
 
 ## Tools
 

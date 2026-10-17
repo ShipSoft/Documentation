@@ -33,7 +33,7 @@ minor version.
 
 ## Using it
 
-Add `ship-random` from [prefix.dev/ship](https://prefix.dev/channels/ship),
+Add `ship-random` from [prefix.dev/ship-experiment/stable](https://prefix.dev/channels/@ship-experiment/stable),
 then in CMake:
 
 ```cmake

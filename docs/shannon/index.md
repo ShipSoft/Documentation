@@ -38,4 +38,4 @@ pixi run smoke     # generate a small input, run workflows/smoke.jsonnet, check 
 
 Other tasks: `configure`, `install`, `clean`, and `clang-tidy` /
 `clang-tidy-diff` for static analysis. Shannon is also packaged as `shannon`
-on the [prefix.dev/ship](https://prefix.dev/channels/ship) channel.
+on the [prefix.dev/ship-experiment/stable](https://prefix.dev/channels/@ship-experiment/stable) channel.

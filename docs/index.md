@@ -25,4 +25,4 @@ If you're only joining SHiP and/or CERN, please start from **[Onboarding](first-
 ## Contributing
 
 - **[Developer Guide](dev-guide/index.md)** — pixi workflows, linting, working across several packages
-- **[Packaging](packaging/index.md)** — Conda recipes and the prefix.dev/ship channel
+- **[Packaging](packaging/index.md)** — Conda recipes and the prefix.dev/ship-experiment/stable channel
