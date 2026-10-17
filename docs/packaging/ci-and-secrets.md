@@ -119,10 +119,15 @@ neutrino energy.
   publisher on its channel (`@ship-experiment/stable` or
   `@ship-experiment/nightly`) in the prefix.dev channel settings. A
   new workflow that uploads needs its own entry there.
+- `APP_CLIENT_ID` (variable) and `APP_PRIVATE_KEY` (secret) — the
+  credentials of a GitHub App. `finalize-renovate-pr.yml` creates a
+  short-lived app token from them and uses it to push the sha256
+  refresh commit. Workflows don't start on pushes made with
+  `GITHUB_TOKEN`, so the app token is what makes the build and lint
+  checks run on that commit.
 - `GITHUB_TOKEN` — default per-run token. It covers the PRs opened by
   `update-lock-files.yml`, `channel-snapshot.yml` and
-  `channel-drift.yml`, and the follow-up commit pushed by
-  `finalize-renovate-pr.yml`. No extra configuration needed.
+  `channel-drift.yml`. No extra configuration needed.
 
 ## Triggering a targeted rebuild
 
