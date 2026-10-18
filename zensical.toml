@@ -3,6 +3,7 @@ site_name = "SHiP Software"
 site_description = "Documentation for the SHiP experiment software"
 site_author = "SHiP Collaboration"
 site_url = "https://shipsoft.github.io/Documentation/"
+copyright = "&copy; CERN for the benefit of the SHiP Collaboration"
 
 nav = [
   { "Home" = "index.md" },
@@ -53,11 +54,21 @@ nav = [
   { "HTCondor" = "htcondor/index.md" },
 ]
 
+# Assets live in docs/ (paths are relative to the docs folder).
+extra_css = [
+  "stylesheets/ship.css",
+]
+
 [project.theme]
 variant = "classic"
-logo = "https://ship.web.cern.ch/wp-content/uploads/2025/07/SHiP-Symbol_White_logo_webpage-1.png"
-favicon = "https://ship.web.cern.ch/wp-content/uploads/2025/08/115x115.png"
+logo = "assets/logo/ship-symbol-white.png"
+favicon = "assets/logo/favicon-192.png"
 language = "en"
+
+# Google Fonts: Source Sans 3 (text) and Source Code Pro (code).
+# Set `font = false` instead to ship with system fonts only (offline builds).
+font.text = "Source Sans 3"
+font.code = "Source Code Pro"
 
 features = [
     "content.code.copy",
@@ -67,16 +78,25 @@ features = [
     "navigation.indexes",
     "navigation.sections",
     "navigation.tabs",
+    "navigation.top",
     "search.highlight",
+    "search.suggest",
 ]
 
+# Both palettes use `custom` so the colours come from stylesheets/ship.css.
 [[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
 scheme = "default"
+primary = "custom"
+accent = "custom"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to dark mode"
 
 [[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
 scheme = "slate"
+primary = "custom"
+accent = "custom"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to light mode"
 
