@@ -1,0 +1,419 @@
+/* ==========================================================================
+   SHiP Software documentation — Zensical theme
+   --------------------------------------------------------------------------
+   Identity: CERN blue (Pantone 286 C, #0033a0) carries the brand; the SHiP
+   wheel is a single-ink mark (white on blue header, black on light ground).
+   Type: Source Sans 3 for text, Source Code Pro for code (set in zensical.toml
+   via font.text / font.code; the --md-*-font variables below keep the system
+   fallback chain intact).
+
+   Tokens are declared once per colour scheme as --ship-* custom properties,
+   then mapped onto Zensical's --md-* variables. Change a --ship-* value and
+   everything downstream follows.
+   ========================================================================== */
+
+/* ---- Light scheme ("default") ------------------------------------------- */
+[data-md-color-scheme="default"] {
+  /* brand */
+  --ship-blue:           #0033a0;   /* CERN blue, Pantone 286 C */
+  --ship-blue-deep:      #00226e;   /* pressed / dark variant   */
+  --ship-blue-soft:      #335cb3;   /* light variant            */
+  --ship-blue-tint:      #e8eef9;   /* tinted surfaces          */
+  --ship-accent:         #b4420f;   /* signal orange: hover, focus, marks  */
+
+  /* neutrals */
+  --ship-surface:        #ffffff;
+  --ship-surface-raised: #f4f6fa;
+  --ship-surface-code:   #eef1f6;
+  --ship-ink:            #10223f;
+  --ship-ink-muted:      #4f5d73;
+  --ship-border:         #c9d1de;
+  --ship-hairline:       #e3e8f0;
+
+  /* status */
+  --ship-success:        #1d6b3a;
+  --ship-warning:        #8a5a00;
+  --ship-danger:         #b3261e;
+  --ship-info:           #0033a0;
+
+  /* ---- Zensical / Material variables ---- */
+  --md-primary-fg-color:        var(--ship-blue);
+  --md-primary-fg-color--light: var(--ship-blue-soft);
+  --md-primary-fg-color--dark:  var(--ship-blue-deep);
+  --md-primary-bg-color:        #ffffff;
+  --md-primary-bg-color--light: rgba(255, 255, 255, 0.72);
+
+  --md-accent-fg-color:         var(--ship-accent);
+  --md-accent-fg-color--transparent: rgba(180, 66, 15, 0.10);
+  --md-accent-bg-color:         #ffffff;
+  --md-accent-bg-color--light:  rgba(255, 255, 255, 0.72);
+
+  --md-default-bg-color:        var(--ship-surface);
+  --md-default-fg-color:        var(--ship-ink);
+  --md-default-fg-color--light: var(--ship-ink-muted);
+  --md-default-fg-color--lighter: #7f8ba0;
+  --md-default-fg-color--lightest: var(--ship-hairline);
+
+  --md-typeset-color:           var(--ship-ink);
+  --md-typeset-a-color:         var(--ship-blue);
+  --md-typeset-kbd-color:       var(--ship-surface-raised);
+  --md-typeset-kbd-border-color: var(--ship-border);
+  --md-typeset-table-color:     var(--ship-hairline);
+  --md-typeset-mark-color:      rgba(180, 66, 15, 0.22);
+
+  --md-code-bg-color:           var(--ship-surface-code);
+  --md-code-fg-color:           var(--ship-ink);
+  --md-code-hl-color:           rgba(0, 51, 160, 0.10);
+  --md-code-hl-color--light:    rgba(0, 51, 160, 0.06);
+
+  --md-footer-bg-color:         var(--ship-blue-deep);
+  --md-footer-bg-color--dark:   #001a55;
+  --md-footer-fg-color:         #ffffff;
+  --md-footer-fg-color--light:  rgba(255, 255, 255, 0.78);
+  --md-footer-fg-color--lighter: rgba(255, 255, 255, 0.5);
+
+  --md-admonition-fg-color:     var(--ship-ink);
+  --md-admonition-bg-color:     var(--ship-surface);
+}
+
+/* ---- Dark scheme ("slate") ---------------------------------------------- */
+[data-md-color-scheme="slate"] {
+  --md-hue: 222;                         /* keeps Zensical's derived greys on the blue axis */
+
+  --ship-blue:           #0033a0;
+  --ship-blue-deep:      #00226e;
+  --ship-blue-soft:      #8db0ff;        /* links on dark ground: 8.5:1 on --ship-surface */
+  --ship-blue-tint:      #182440;
+  --ship-accent:         #ffa26b;
+
+  --ship-surface:        #0d1526;
+  --ship-surface-raised: #141f36;
+  --ship-surface-code:   #182440;
+  --ship-ink:            #e6ebf4;
+  --ship-ink-muted:      #a3afc4;
+  --ship-border:         #2b3a57;
+  --ship-hairline:       #1f2c47;
+
+  --ship-success:        #6fd49a;
+  --ship-warning:        #f5c451;
+  --ship-danger:         #ff8a80;
+  --ship-info:           #8db0ff;
+
+  --md-primary-fg-color:        var(--ship-blue);
+  --md-primary-fg-color--light: #335cb3;
+  --md-primary-fg-color--dark:  var(--ship-blue-deep);
+  --md-primary-bg-color:        #ffffff;
+  --md-primary-bg-color--light: rgba(255, 255, 255, 0.72);
+
+  --md-accent-fg-color:         var(--ship-accent);
+  --md-accent-fg-color--transparent: rgba(255, 162, 107, 0.12);
+  --md-accent-bg-color:         var(--ship-surface);
+  --md-accent-bg-color--light:  rgba(13, 21, 38, 0.72);
+
+  --md-default-bg-color:        var(--ship-surface);
+  --md-default-bg-color--light: rgba(13, 21, 38, 0.72);
+  --md-default-bg-color--lighter: rgba(13, 21, 38, 0.5);
+  --md-default-bg-color--lightest: rgba(13, 21, 38, 0.15);
+  --md-default-fg-color:        var(--ship-ink);
+  --md-default-fg-color--light: var(--ship-ink-muted);
+  --md-default-fg-color--lighter: #6f7d98;
+  --md-default-fg-color--lightest: var(--ship-hairline);
+
+  --md-typeset-color:           var(--ship-ink);
+  --md-typeset-a-color:         var(--ship-blue-soft);
+  --md-typeset-kbd-color:       var(--ship-surface-raised);
+  --md-typeset-kbd-accent-color: var(--ship-surface-code);
+  --md-typeset-kbd-border-color: var(--ship-border);
+  --md-typeset-table-color:     var(--ship-hairline);
+  --md-typeset-mark-color:      rgba(255, 162, 107, 0.25);
+
+  --md-code-bg-color:           var(--ship-surface-code);
+  --md-code-fg-color:           var(--ship-ink);
+  --md-code-hl-color:           rgba(141, 176, 255, 0.14);
+  --md-code-hl-color--light:    rgba(141, 176, 255, 0.08);
+
+  --md-footer-bg-color:         #060b17;
+  --md-footer-bg-color--dark:   #03070f;
+  --md-footer-fg-color:         var(--ship-ink);
+  --md-footer-fg-color--light:  var(--ship-ink-muted);
+  --md-footer-fg-color--lighter: #6f7d98;
+
+  --md-admonition-fg-color:     var(--ship-ink);
+  --md-admonition-bg-color:     var(--ship-surface-raised);
+}
+
+/* ---- Typography ---------------------------------------------------------- */
+:root {
+  --md-text-font: "Source Sans 3";
+  --md-code-font: "Source Code Pro";
+}
+
+.md-typeset {
+  font-size: 0.85rem;             /* 17px at the 20px root Zensical uses */
+  line-height: 1.6;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset h1 {
+  font-size: 2rem;
+  line-height: 1.15;
+  margin-bottom: 1.2rem;
+}
+
+.md-typeset h2 {
+  font-size: 1.45rem;
+  line-height: 1.2;
+  margin-top: 2.2em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid var(--ship-hairline);
+}
+
+.md-typeset h3 { font-size: 1.15rem; }
+
+.md-typeset code,
+.md-typeset kbd,
+.md-typeset pre {
+  font-feature-settings: "liga" 0;
+}
+
+.md-typeset code {
+  border-radius: 3px;
+  padding: 0.05em 0.3em;
+}
+
+.md-typeset pre > code {
+  border-radius: 4px;
+  line-height: 1.55;
+}
+
+/* ---- Header (classic variant: solid primary bar) ------------------------- */
+.md-header {
+  background-color: var(--ship-blue);
+  color: #ffffff;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+[data-md-color-scheme="slate"] .md-header {
+  background-color: var(--ship-blue-deep);
+}
+
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.6rem;
+  width: auto;
+}
+
+.md-header__topic:first-child {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.md-tabs {
+  background-color: var(--ship-blue);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+[data-md-color-scheme="slate"] .md-tabs {
+  background-color: var(--ship-blue-deep);
+}
+
+.md-tabs__link {
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  opacity: 1;
+}
+
+.md-tabs__item--active .md-tabs__link {
+  box-shadow: inset 0 -2px 0 #ffffff;
+}
+
+/* search box on the blue header */
+.md-search__form {
+  background-color: rgba(255, 255, 255, 0.14);
+  border-radius: 4px;
+}
+
+.md-search__form:hover {
+  background-color: rgba(255, 255, 255, 0.22);
+}
+
+[data-md-toggle="search"]:checked ~ .md-header .md-search__form {
+  background-color: var(--md-default-bg-color);
+}
+
+/* ---- Navigation ---------------------------------------------------------- */
+.md-nav__title {
+  font-weight: 600;
+}
+
+.md-nav__item .md-nav__link--active,
+.md-nav__item .md-nav__link--active code {
+  color: var(--md-typeset-a-color);
+  font-weight: 600;
+}
+
+.md-nav__link:is(:focus, :hover) {
+  color: var(--md-accent-fg-color);
+}
+
+.md-sidebar__scrollwrap {
+  scrollbar-color: var(--ship-border) transparent;
+}
+
+/* ---- Content elements ---------------------------------------------------- */
+.md-typeset a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 0.15em;
+}
+
+.md-typeset a:hover {
+  text-decoration-color: currentColor;
+}
+
+.md-typeset .md-button {
+  border-radius: 4px;
+  border-width: 1.5px;
+  font-weight: 600;
+}
+
+.md-typeset .md-button--primary {
+  background-color: var(--ship-blue);
+  border-color: var(--ship-blue);
+  color: #ffffff;
+}
+
+.md-typeset .md-button--primary:hover {
+  background-color: var(--ship-blue-deep);
+  border-color: var(--ship-blue-deep);
+  color: #ffffff;
+}
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--ship-hairline);
+  border-radius: 4px;
+  font-size: 0.78rem;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--ship-surface-raised);
+  color: var(--md-default-fg-color);
+  font-weight: 600;
+}
+
+.md-typeset blockquote {
+  border-left: 3px solid var(--ship-blue);
+  color: var(--md-default-fg-color--light);
+}
+
+/* admonitions: brand-coloured families, no rainbow */
+.md-typeset .admonition,
+.md-typeset details {
+  border-width: 1px;
+  border-left-width: 4px;
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 0.78rem;
+}
+
+.md-typeset .admonition.note,
+.md-typeset details.note,
+.md-typeset .admonition.info,
+.md-typeset details.info,
+.md-typeset .admonition.abstract,
+.md-typeset .admonition.tip,
+.md-typeset details.tip,
+.md-typeset .admonition.example,
+.md-typeset details.example {
+  border-color: var(--ship-info);
+}
+
+.md-typeset .note > .admonition-title,
+.md-typeset .note > summary,
+.md-typeset .info > .admonition-title,
+.md-typeset .abstract > .admonition-title,
+.md-typeset .tip > .admonition-title,
+.md-typeset .example > .admonition-title {
+  background-color: var(--ship-blue-tint);
+}
+
+.md-typeset .note > .admonition-title::before,
+.md-typeset .info > .admonition-title::before,
+.md-typeset .abstract > .admonition-title::before,
+.md-typeset .tip > .admonition-title::before,
+.md-typeset .example > .admonition-title::before {
+  background-color: var(--ship-info);
+}
+
+.md-typeset .admonition.success,
+.md-typeset details.success {
+  border-color: var(--ship-success);
+}
+
+.md-typeset .success > .admonition-title::before {
+  background-color: var(--ship-success);
+}
+
+.md-typeset .admonition.warning,
+.md-typeset details.warning,
+.md-typeset .admonition.question {
+  border-color: var(--ship-warning);
+}
+
+.md-typeset .warning > .admonition-title::before,
+.md-typeset .question > .admonition-title::before {
+  background-color: var(--ship-warning);
+}
+
+.md-typeset .admonition.danger,
+.md-typeset details.danger,
+.md-typeset .admonition.failure,
+.md-typeset .admonition.bug {
+  border-color: var(--ship-danger);
+}
+
+.md-typeset .danger > .admonition-title::before,
+.md-typeset .failure > .admonition-title::before,
+.md-typeset .bug > .admonition-title::before {
+  background-color: var(--ship-danger);
+}
+
+/* ---- Footer -------------------------------------------------------------- */
+.md-footer-meta {
+  font-size: 0.64rem;
+}
+
+.md-footer__link {
+  opacity: 0.9;
+}
+
+/* ---- Focus: solid, visible on every surface ------------------------------ */
+:is(a, button, input, summary):focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
+/* on the blue band the orange ring would sit at 1.9:1 — use white there (10.6:1) */
+.md-header :focus-visible,
+.md-tabs :focus-visible {
+  outline-color: #ffffff;
+}
+
+/* ---- Print --------------------------------------------------------------- */
+@media print {
+  .md-header, .md-tabs, .md-sidebar, .md-footer { display: none !important; }
+  .md-typeset a { text-decoration: none; }
+}
