@@ -117,6 +117,48 @@ example, also writes a frozen compatibility reference file). Getting
 the new version onto `prefix.dev/ship-experiment/stable` is a separate step in
 `ship-conda-recipes`; see [Bump a version](../packaging/bump-a-version.md).
 
+## Integration tests
+
+Each package's own CI feeds it synthetic input, so it can't notice when
+the output of the package upstream no longer fits. Shannon and Trout
+both have a `make_test_input` that writes the format they expect.
+[ShipSoft/integration-tests](https://github.com/ShipSoft/integration-tests)
+runs the stages in order on real data instead:
+
+1. `build_geometry` writes the full SHiP geometry.
+2. aegir simulates a muon gun through it, with the field maps from
+   `ship-field-maps`.
+3. Shannon digitises aegir's output.
+4. Trout reconstructs Shannon's output.
+
+`scripts/validate_chain.py` then checks what each stage handed on:
+detector ids, the hits per detector at every stage, the simulation
+truth passed through, and whether Trout's spectrometer tracks match the
+gun muons in number and momentum.
+
+Two workflows run it:
+
+| Workflow | When | What it runs |
+| --- | --- | --- |
+| `chain.yml` | pull requests, pushes to `main`, weekly | the released packages locked in its `pixi.lock` |
+| `chain-mains.yml` (advisory) | nightly at 03:30 UTC, after the [nightly library builds](index.md#ci-coverage) | aegir, Shannon and Trout built from `main`, each in its own pixi environment |
+
+The stages only exchange files, so in `chain-mains.yml` each stage runs
+in its own repository's environment, through `AEGIR_RUN`, `SHANNON_RUN`
+and `TROUT_RUN` in `scripts/run_chain.sh`. To try your branch in the
+chain locally, check out the three repositories side by side, build
+them with `pixi run install`, and point these variables at the
+checkouts (the integration-tests README has the details).
+
+Trout doesn't reconstruct real straw-tube hits yet
+([Trout#46](https://github.com/ShipSoft/Trout/issues/46),
+[#47](https://github.com/ShipSoft/Trout/issues/47),
+[#48](https://github.com/ShipSoft/Trout/issues/48)). Until it does, `chain.yml` only reports the
+track checks, and `chain-mains.yml`, which requires them, stays red.
+Shannon's output also has no spill boundaries
+([Shannon#51](https://github.com/ShipSoft/Shannon/issues/51)), so the
+chain reconstructs all events as one spill.
+
 ## Physics metrics
 
 aegir compares a set of physics metrics between a pull request and
