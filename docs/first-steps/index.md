@@ -90,11 +90,24 @@ For general HEP software skills, use the [HSF Training Center](https://hsf-train
 
 For ROOT, start from the official [ROOT@CERN Learn page](https://root.cern/learn/), which links to the current ROOT courses, exercises, tutorials, manual, API documentation, and ROOT forum. The ROOT courses can be run through SWAN if you have a CERN computing account.
 
-The [ShipSoft tutorials](https://github.com/ShipSoft/tutorials) repository has slides from earlier SHiP software tutorials. They date from 2024, so commands and paths in them may be out of date; check them against this documentation.
+The [ShipSoft tutorials](https://github.com/ShipSoft/tutorials) repository holds the material of the SHiP software tutorials. The current one is the booklet described in [section 5](#5-set-up-your-first-technical-task); the slides from 2024 predate the current software, so commands and paths in them may be out of date.
 
 ## 5. Set up your first technical task
 
 Do not begin by trying to configure every possible CERN and SHiP tool. Start from one reproducible task agreed with your supervisor.
+
+### Start with the software tutorial
+
+If your task uses the new SHiP software (Geometry, aegir, Shannon, sea-cucumber), or you do not have a task yet, work through the tutorial booklet *The SHiP Software Framework: from protons on target to digitised hits*. It was used for the tutorial session in Siegen; the [recording](https://cernbox.cern.ch/files/spaces/eos/user/o/olantwin/GMT20261021-072201_Recording.tar.xz) follows the same chapters.
+
+- **Booklet:** [`sw_tutorial_Oct_2026`](https://github.com/ShipSoft/tutorials/tree/main/sw_tutorial_Oct_2026) in the tutorials repository, with the code its exercises use in `code/`. Its README says how to build the PDF.
+- **Where it runs:** on LXPLUS, with pixi from CVMFS; chapter 1 lists what you need before you start.
+- **Part I:** git, branches, pull requests, pixi, CI, and a team analysis in a shared repository. This is the workflow every ShipSoft contribution follows.
+- **Part II:** the chain from scratch: the geometry, the field maps, a fixed-target production and muons through the detector with aegir, the event display, digitisation with Shannon, and your own analysis of the aegir and Shannon files.
+
+Chapter 1 of the booklet lists the package versions it was checked against. The packages change; if a command no longer works, check the package's page in this documentation, and [open an issue](https://github.com/ShipSoft/tutorials/issues) on the tutorials repository.
+
+### Define your task
 
 Write down:
 
