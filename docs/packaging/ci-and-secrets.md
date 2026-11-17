@@ -125,14 +125,17 @@ neutrino energy.
   `@ship-experiment/nightly`) in the prefix.dev channel settings. A
   new workflow that uploads needs its own entry there.
 - `APP_CLIENT_ID` (variable) and `APP_PRIVATE_KEY` (secret) — the
-  credentials of a GitHub App. `finalize-renovate-pr.yml` creates a
-  short-lived app token from them and uses it to push the sha256
-  refresh commit. Workflows don't start on pushes made with
-  `GITHUB_TOKEN`, so the app token is what makes the build and lint
-  checks run on that commit.
-- `GITHUB_TOKEN` — default per-run token. It covers the PRs opened by
-  `update-lock-files.yml`, `channel-snapshot.yml` and
-  `channel-drift.yml`. No extra configuration needed.
+  credentials of ship's mate, the organisation's GitHub App. Workflows
+  don't start on pushes or PRs made with `GITHUB_TOKEN`, so anything
+  that needs CI to run on its commits uses a short-lived app token
+  instead. `finalize-renovate-pr.yml` pushes the sha256 refresh commit
+  with it, and `channel-snapshot.yml` and `channel-drift.yml` open
+  their PRs with it. `update-lock-files.yml` and
+  `update-shared-configs.yml` pass `APP_PRIVATE_KEY` to the reusable
+  workflows as `app-private-key`, so their PRs come from ship's mate
+  too.
+- `GITHUB_TOKEN` — default per-run token, used for everything else. No
+  extra configuration needed.
 
 ## Triggering a targeted rebuild
 

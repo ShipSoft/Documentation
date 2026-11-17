@@ -30,6 +30,17 @@ of 2026-10:
 The workflows are referenced by `@main`, so a change in
 `ShipSoft/.github` reaches every caller on its next run.
 
+Callers of `pixi-lock-update.yml` and `config-sync.yml` pass the org
+secret `APP_PRIVATE_KEY` as `app-private-key`. The PR is then opened by
+the ship's mate GitHub App rather than with `GITHUB_TOKEN`, which
+matters because GitHub doesn't start workflows for PRs opened with
+`GITHUB_TOKEN`:
+
+```yaml
+    secrets:
+      app-private-key: ${{ secrets.APP_PRIVATE_KEY }}
+```
+
 ## What a pull request has to pass
 
 Every repository listed in
