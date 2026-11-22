@@ -11,17 +11,17 @@ request.
 
 A repository calls these from its own `.github/workflows/` with
 `uses: ShipSoft/.github/.github/workflows/<name>.yml@main`. Callers as
-of 2026-10:
+of 2026-11:
 
 | Workflow | What it does | Called by |
 | --- | --- | --- |
-| `pixi-cmake-build.yml` | Runs a list of pixi tasks (`configure`, `build`, `test`, …) with `--locked`, compiling through ccache | aegir, aegir-genie, data-model, field_service, Geometry, geometry_service, Shannon, ship-ci-metrics, ship-random, Trout |
+| `pixi-cmake-build.yml` | Runs a list of pixi tasks (`configure`, `build`, `test`, …) with `--locked`, compiling through ccache | aegir, aegir-genie, data-model, field_maps, field_service, Geometry, geometry_service, integration-tests, Shannon, ship-ci-metrics, ship-random, Trout |
 | `prek.yml` | Runs the prek hooks from the `lint` environment, check-only (see [Linting & git hooks](linting-and-hooks.md)) | every active pixi repository except sea-cucumber |
 | `commit-check.yml` | Checks every commit of a PR against Conventional Commits with commitizen | same as `prek.yml` |
 | `clang-tidy.yml` | clang-tidy ratchet: fails only on findings in changed lines | aegir, aegir-genie, data-model, field_service, Geometry, geometry_service, Shannon, ship-random |
 | `pixi-lock-update.yml` | Scheduled PR that runs `pixi update` and shows the diff | every active pixi repository except sea-cucumber |
 | `config-sync.yml` | Scheduled PR that copies the shared config files from `sync/` | all active repositories except sea-cucumber |
-| `release.yml` | Publishes a GitHub release for a pushed `v*` tag, with notes from git-cliff | aegir, aegir-genie, data-model, field_service, Geometry, geometry_service, Shannon, ship-ci-metrics, ship-random, Trout |
+| `release.yml` | Publishes a GitHub release for a pushed `v*` tag, with notes from git-cliff | aegir, aegir-genie, data-model, field_maps, field_service, Geometry, geometry_service, Shannon, ship-ci-metrics, ship-random, Trout |
 | `doxygen-pages.yml` | Builds Doxygen and deploys it to GitHub Pages through Actions | aegir, aegir-genie, data-model, field_service, Geometry, geometry_service, Shannon, ship-random, Trout |
 | `doxygen-gh-pages.yml` | The same, published to a `gh-pages` branch | FairShip |
 | `physics-metrics.yml` | Stores physics metrics from `main` in git notes and compares PRs against them | aegir |
@@ -63,8 +63,8 @@ checked on the pull request.
 
 Some repositories have a different tier in `repos.json`. sea-cucumber
 builds, tests and lints in one job, so it only requires
-`All checks passed`. Trout, htcondor_submission_scripts, tutorials and
-`.github` itself have no required checks.
+`All checks passed`. Trout, htcondor_submission_scripts, planning,
+tutorials and `.github` itself have no required checks.
 
 The settings are applied by hand with
 `repo-config/apply-repo-config.sh` (a dry run prints the drift), not
