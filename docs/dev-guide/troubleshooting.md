@@ -72,6 +72,14 @@ directory (`linux-64`, `noarch`, …) that `ls` shows them in.
 If you don't need the local channel at all, leave the `channels` line
 of the dev block commented out.
 
+The same message appears when a source dependency doesn't satisfy a
+version range declared elsewhere in the manifest, for example a
+`data-model` checkout at 0.7.0 in an environment that also has
+`shipdatamodel >=0.6,<0.7`. pixi then names only the channel builds,
+not the source build that actually failed (gap 10 in the [gap
+log](pixi-build-gaps.md)). Check the `[package].version` of the
+checkout against the specs the `dev` environment includes.
+
 ## Where things live
 
 | Artifact | Location |
