@@ -36,6 +36,7 @@ nav = [
   { "ship-random" = "ship-random/index.md" },
   { "Developer Guide" = [
     { "Overview" = "dev-guide/index.md" },
+    { "Coming from aliBuild" = "dev-guide/from-alibuild.md" },
     { "Linting & git hooks" = "dev-guide/linting-and-hooks.md" },
     { "CI & repository conventions" = "dev-guide/ci-and-conventions.md" },
     { "Multi-package development" = "dev-guide/multi-package.md" },

@@ -86,9 +86,10 @@ environments include and `dev` does not. If they sat in the base
 `[dependencies]`, the `dev` environment would see both the channel
 spec and the path spec, and the solver could still pick the released
 binary (aegir#90, gap 10 in the [gap log](pixi-build-gaps.md)).
-aegir-genie and Trout still declare their SHiP dependencies in
-`[dependencies]`; check `pixi list -e dev <package>` there to confirm
-you got the source build.
+aegir-genie does the same. Trout has the table as well, but its
+committed `dev` environment includes `released`, so drop it there
+when you uncomment the path line. In any repo,
+`pixi list -e dev <package>` confirms you got the source build.
 
 ## Rules
 
