@@ -9,8 +9,10 @@ many people work on them at once.
 
 Continuous integration (CI) is what keeps this manageable. On every
 pull request, GitHub Actions builds the repository, runs its tests and
-checks its code style and commit messages, and the pull request can
-only be merged once these checks pass and someone has reviewed it. A
+checks its code style and commit messages. In most repositories the
+pull request can only be merged once these checks pass and someone has
+reviewed it (the exceptions are under [What a pull request has to
+pass](#what-a-pull-request-has-to-pass)). A
 change that breaks the build is caught before it reaches `main`, not
 by the next person who pulls it.
 
