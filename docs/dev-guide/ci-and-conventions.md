@@ -1,11 +1,33 @@
 # CI & repository conventions
 
-The ShipSoft repositories share their CI, release tooling and
-repository settings through
-[`ShipSoft/.github`](https://github.com/ShipSoft/.github). Its README
-is the reference for every workflow input; this page is the overview:
-what exists, who uses it, and what it means when you open a pull
-request.
+The SHiP software is spread over many repositories in the
+[ShipSoft](https://github.com/ShipSoft) organisation: the frameworks
+(FairShip, aegir, Shannon, Trout), the libraries they share
+(data-model, Geometry, field_service and others) and the packaging
+around them. Each has its own pull requests and its own releases, and
+many people work on them at once.
+
+Continuous integration (CI) is what keeps this manageable. On every
+pull request, GitHub Actions builds the repository, runs its tests and
+checks its code style and commit messages, and the pull request can
+only be merged once these checks pass and someone has reviewed it. A
+change that breaks the build is caught before it reaches `main`, not
+by the next person who pulls it.
+
+The conventions are the rules these checks enforce, and most
+repositories share them: [Conventional
+Commits](https://www.conventionalcommits.org/) messages, the same
+linters, a linear history and one approving review. Once you know them
+from one repository, you know them for the others. They also make
+releases mostly automatic, since release notes are generated from the
+commit messages.
+
+The shared CI workflows, release tooling and repository settings live
+in one repository,
+[`ShipSoft/.github`](https://github.com/ShipSoft/.github), whose
+README documents every workflow input. This page is the overview:
+what is shared, which repositories use it, and what it means for you
+when you open a pull request.
 
 ## Reusable workflows
 
