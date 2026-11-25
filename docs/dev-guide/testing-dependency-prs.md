@@ -114,7 +114,9 @@ Two rules:
 - **Check out the released version** of the package, the one
   `pixi list <package>` shows, and patch on top of it. Everything else
   in the environment was built against it, and `install` refuses a
-  checkout whose nearest tag is a different version.
+  checkout whose nearest tag is a different version. `-f` overrides
+  that, for example to try a fix based on upstream `main`, at the risk
+  of ABI mismatches.
 - **Work in a throwaway worktree of the consumer.** The overlay changes
   the environment behind pixi's back: `pixi list` keeps showing the
   released build.
