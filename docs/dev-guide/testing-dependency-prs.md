@@ -113,7 +113,8 @@ Two rules:
 
 - **Check out the released version** of the package, the one
   `pixi list <package>` shows, and patch on top of it. Everything else
-  in the environment was built against it.
+  in the environment was built against it, and `install` refuses a
+  checkout whose nearest tag is a different version.
 - **Work in a throwaway worktree of the consumer.** The overlay changes
   the environment behind pixi's back: `pixi list` keeps showing the
   released build.
@@ -142,8 +143,8 @@ consumer environment lacks; they come from a cached `pixi exec`
 environment. The build directory is `<src>-overlay-build` next to the
 checkout. It belongs to the environment it was configured for: to
 overlay the same checkout on another consumer, run `configure` again
-for that one. To build with debug information, add
-`-DCMAKE_BUILD_TYPE=Debug`.
+for that one, which starts from a fresh CMake cache. To build with
+debug information, add `-DCMAKE_BUILD_TYPE=Debug`.
 
 For phlex under aegir, the first build takes about 4 minutes. After
 that, a one-line change in `phlex/core` takes about 50 s to rebuild and
@@ -167,7 +168,11 @@ installing, so `status` shows it with `state=installing` and `restore`
 still puts the released package back. Files that the failed install
 added and the package doesn't ship are not listed anywhere, though, so
 they stay. If that matters, recreate the environment of the throwaway
-worktree with `pixi clean` and `pixi install`.
+worktree:
+
+```console
+$ (cd ../aegir.phlex-fix && pixi clean && pixi install)
+```
 
 ### Why it installs into the environment
 
