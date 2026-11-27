@@ -23,9 +23,10 @@ without your checkouts). When you're done:
 $ git checkout pixi.toml pixi.lock
 ```
 
-In Trout the `dev` environment already exists, so step 2 is just
-uncommenting the `shipdatamodel = { path = "../data-model" }` line and
-running `pixi lock`.
+In Trout the `dev` environment already exists, so step 2 is
+uncommenting the `shipdatamodel = { path = "../data-model" }` line,
+dropping `released` from the `dev` environment (see
+[How it works](#how-it-works)) and running `pixi lock`.
 
 ## The loop
 
