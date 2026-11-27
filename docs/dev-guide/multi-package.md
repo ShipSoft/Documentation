@@ -23,9 +23,10 @@ without your checkouts). When you're done:
 $ git checkout pixi.toml pixi.lock
 ```
 
-In Trout the `dev` environment already exists, so step 2 is just
-uncommenting the `shipdatamodel = { path = "../data-model" }` line and
-running `pixi lock`.
+In Trout the `dev` environment already exists, so step 2 is
+uncommenting the `shipdatamodel = { path = "../data-model" }` line,
+dropping `released` from the `dev` environment (see
+[How it works](#how-it-works)) and running `pixi lock`.
 
 ## The loop
 
@@ -83,12 +84,14 @@ shipdatamodel = { path = "../data-model" }
 In aegir, the released specs of the three co-developed packages live
 in a `[feature.released]` table that the default, bench and lint
 environments include and `dev` does not. If they sat in the base
-`[dependencies]`, the `dev` environment would see both the channel
-spec and the path spec, and the solver could still pick the released
-binary (aegir#90, gap 10 in the [gap log](pixi-build-gaps.md)).
-aegir-genie and Trout still declare their SHiP dependencies in
-`[dependencies]`; check `pixi list -e dev <package>` there to confirm
-you got the source build.
+`[dependencies]`, the `dev` environment would get both the version
+range and the path spec, combined, so a checkout whose version is
+outside the released range couldn't be used (gap 10 in the [gap
+log](pixi-build-gaps.md)).
+aegir-genie does the same. Trout has the table as well, but its
+committed `dev` environment includes `released`, so drop it there
+when you uncomment the path line. In any repo,
+`pixi list -e dev <package>` confirms you got the source build.
 
 ## Rules
 

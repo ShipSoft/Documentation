@@ -98,3 +98,91 @@ feedstock recipe — refresh it when the feedstock changes (see the
 Its `variants.yaml` pins the ABI-relevant host packages (ROOT, spdlog,
 fmt, python) to what aegir's lock currently uses; refresh those pins
 when the stack moves.
+
+## Patching an upstream package in place
+
+`build-phlex-pr` produces a proper package, but every change means a
+full package build, and only phlex has a dev recipe. For a quick fix to
+any CMake-built upstream package (phlex, ROOT, Geant4, ACTS, GeoModel,
+…) there is a faster loop: build the source checkout incrementally with
+the consumer's own pixi environment and install it over the released
+package in that environment. Nothing downstream is rebuilt, which is
+fine as long as your change keeps the ABI.
+
+Two rules:
+
+- **Check out the released version** of the package, the one
+  `pixi list <package>` shows, and patch on top of it. Everything else
+  in the environment was built against it, and `install` refuses a
+  checkout whose nearest tag is a different version. `-f` overrides
+  that, for example to try a fix based on upstream `main`, at the risk
+  of ABI mismatches.
+- **Work in a throwaway worktree of the consumer.** The overlay changes
+  the environment behind pixi's back: `pixi list` keeps showing the
+  released build.
+
+The `overlay` task in `ship-conda-recipes` does the bookkeeping. With
+phlex under aegir:
+
+```console
+$ git -C aegir worktree add ../aegir.phlex-fix origin/main
+$ git -C phlex worktree add ../phlex.fix v0.4.2   # the version in aegir's lock
+$ (cd aegir.phlex-fix && pixi install)
+$ cd ship-conda-recipes
+$ pixi run overlay configure ../aegir.phlex-fix ../phlex.fix \
+    -t "cetmodules pkg-config" -- \
+    --preset default -DCMAKE_CXX_STANDARD=23 -DBUILD_TESTING=OFF \
+    -DENABLE_CLANG_TIDY=OFF -DFORM_USE_RNTUPLE_STORAGE=ON
+$ pixi run overlay build ../aegir.phlex-fix ../phlex.fix
+$ pixi run overlay install ../aegir.phlex-fix ../phlex.fix phlex
+$ (cd ../aegir.phlex-fix && pixi run build && pixi run smoke)
+```
+
+Then edit, `build`, `install` and rerun as often as you like. The CMake
+arguments after `--` are the ones in the feedstock's `build.sh` (or the
+`script:` section of its recipe). `-t` names build-only tools the
+consumer environment lacks; they come from a cached `pixi exec`
+environment. The build directory is `<src>-overlay-build` next to the
+checkout. It belongs to the environment it was configured for: to
+overlay the same checkout on another consumer, run `configure` again
+for that one, which starts from a fresh CMake cache. To build with
+debug information, add `-DCMAKE_BUILD_TYPE=Debug`.
+
+For phlex under aegir, the first build takes about 4 minutes. After
+that, a one-line change in `phlex/core` takes about 50 s to rebuild and
+1.5 s to install, and aegir picks it up without being rebuilt. For ROOT
+or Geant4 the first build takes as long as a full build of the package.
+
+`pixi run overlay status ../aegir.phlex-fix` lists what is overlaid.
+To undo:
+
+```console
+$ pixi run overlay restore ../aegir.phlex-fix phlex
+```
+
+This deletes every file that any `install` of the package put there,
+including files a later build no longer installs, and has
+`pixi reinstall` put the released package back.
+
+If `install` fails part-way, the environment holds a mix of released
+and patched files. The task records the overlay before it starts
+installing, so `status` shows it with `state=installing` and `restore`
+still puts the released package back. Files that the failed install
+added and the package doesn't ship are not listed anywhere, though, so
+they stay. If that matters, recreate the environment of the throwaway
+worktree:
+
+```console
+$ (cd ../aegir.phlex-fix && pixi clean && pixi install)
+```
+
+### Why it installs into the environment
+
+A separate prefix on `LD_LIBRARY_PATH` doesn't work: conda-forge
+binaries are linked with `DT_RPATH` (`$ORIGIN/`), which the dynamic
+loader searches before `LD_LIBRARY_PATH`, so they keep loading the
+released libraries. Installing over them is safe for the package cache:
+pixi hardlinks environment files from the shared cache, but
+`cmake --install` replaces files rather than writing into them. Don't
+copy files into the environment with `cp`: that would write through the
+hardlink and change the package for every environment that uses it.

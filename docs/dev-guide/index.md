@@ -44,7 +44,7 @@ explicit name:
 $ git clone https://github.com/ShipSoft/Geometry geometry
 ```
 
-## The two mechanisms
+## The three mechanisms
 
 **Source dependencies** — a consumer's `dev` environment declares e.g.
 `shipdatamodel = { path = "../data-model" }`; pixi builds the checkout
@@ -52,7 +52,7 @@ into a conda package on the fly (using the `[package]` section that
 repo declares) and rebuilds it automatically whenever its sources
 change. The producers are `data-model`, `geometry` and
 `geometry_service`. Consumers with a dev block are aegir (all three),
-aegir-genie (`geometry_service`) and Trout (`data-model`). See
+aegir-genie (`data-model`, `geometry_service`) and Trout (`data-model`). See
 [Multi-package development](multi-package.md).
 
 **Local channel** — packages whose build can't go through a source
@@ -61,6 +61,16 @@ dependency yet (`field-service` because of its multi-output recipe,
 `../ship-local-channel` file channel, which dev environments resolve
 ahead of the remote channels. See
 [Testing dependency PRs](testing-dependency-prs.md).
+
+**Overlay** — for a quick fix to an upstream package (phlex, ROOT,
+Geant4, …), `pixi run overlay` in `ship-conda-recipes` builds the
+source checkout incrementally inside a consumer environment and
+installs it over the released package, with a `restore` step to undo
+it. See [Patching an upstream package in
+place](testing-dependency-prs.md#patching-an-upstream-package-in-place).
+
+[Coming from aliBuild](from-alibuild.md) maps the aliBuild development
+workflows onto these mechanisms.
 
 ## Requirements and caveats
 

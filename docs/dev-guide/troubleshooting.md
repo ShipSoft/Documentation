@@ -51,6 +51,35 @@ the rattler-build-backend channel bug — see the
 [gap log](pixi-build-gaps.md). Affected packages must go through the
 local channel for now.
 
+## `excluded because due to strict channel priority`
+
+A dev solve that fails like this, naming a package you didn't build
+locally on purpose, usually means an old build of it is still in
+`../ship-local-channel`. pixi uses strict channel priority, so any
+version of a package in the local channel hides all versions of it in
+the remote channels. Find the builds of the package the error names,
+delete them and re-index. For example, for a stale field-service 0.2.0:
+
+```console
+$ ls ../ship-local-channel/*/field-service-*
+$ rm ../ship-local-channel/linux-64/field-service-0.2.0-*.conda
+$ pixi exec -s rattler-index -- rattler-index fs ../ship-local-channel
+```
+
+Use the package name and version from the error, and the platform
+directory (`linux-64`, `noarch`, …) that `ls` shows them in.
+
+If you don't need the local channel at all, leave the `channels` line
+of the dev block commented out.
+
+The same message appears when a source dependency doesn't satisfy a
+version range declared elsewhere in the manifest, for example a
+`data-model` checkout at 0.7.0 in an environment that also has
+`shipdatamodel >=0.6,<0.7`. pixi then names only the channel builds,
+not the source build that actually failed (gap 10 in the [gap
+log](pixi-build-gaps.md)). Check the `[package].version` of the
+checkout against the specs the `dev` environment includes.
+
 ## Where things live
 
 | Artifact | Location |
@@ -58,6 +87,8 @@ local channel for now.
 | Source-dependency build dirs | `<consumer>/.pixi/bld/<package>/` |
 | Local channel | `../ship-local-channel/{linux-64,noarch}/` |
 | Dev environments | `<consumer>/.pixi/envs/dev/` |
+| Overlay build dir | `<src>-overlay-build/` next to the source checkout |
+| Overlay records | `<consumer>/.pixi/envs/<env>/.ship-overlay/<package>/` |
 
 `pixi clean` in the consumer removes `.pixi` (environments and build
 dirs) if you want a fully fresh start.
